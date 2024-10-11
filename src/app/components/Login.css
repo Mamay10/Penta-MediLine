@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f5f7;
+  }
+  
+  .login-logo {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+  }
+  
+  .login-logo img {
+    width: 100px;
+  }
+  
+  .login-card {
+    background-color: #1D4A50 ;
+    padding: 50px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 2, 0.5);
+    width: 400px;
+    color: #fff;
+  }
+  
+  h2 {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .input-field {
+    margin-bottom: 16px;
+  }
+  
+  .input-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  .input-field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .input-field input:focus {
+    outline: none;
+    border-color:  #ddd;
+  }
+  
+  .forgot-password {
+    text-align: right;
+    margin-bottom: 16px;
+  }
+  
+  .forgot-password a {
+    color: #fdfdfc;
+    font-size: 12px;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #fffffe;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #00695c;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color:  #1D4A50;
+  }
+  .decorative-image {
+    margin-right: 10px;
+    text-align: center;
+  }
+  
+  .decorative-image img {
+    width: 700px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+    
