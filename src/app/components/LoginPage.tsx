@@ -1,26 +1,28 @@
-"use client";
-import React, { useState } from "react";
-import "./Login.css"; // Create corresponding CSS for styling
+"use client"; // Tambahkan ini di baris pertama
+
+import { useRouter } from 'next/navigation'; // Ganti next/router dengan next/navigation
+import { useState } from 'react';
+import "../styles/Login.css"; // Buat file CSS untuk styling
+import Layout from "./Layout";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter(); // Menggunakan next/navigation
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
-    // Handle login logic here
-    console.log("Login clicked", { username, password });
+    if (username === "admin" && password === "admin") {
+      router.push("/dashboard"); // Redirect ke dashboard
+    } else {
+      alert("Login gagal");
+    }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-logo">
-        <img src="/assets/MEDILINE LOGO.png" alt="MediLine Logo" />
-       
-      </div>
-      <div className="decorative-image">
-          <img src="/assets/icon Login.png" alt="Gambar Dekoratif" />
-      </div>
+    <Layout  imageSrc="/assets/icon login.png"  
+    secondImageClassName="extra-login-image"  // ClassName khusus untuk gambar tambahan di Login
+>
       <div className="login-card">
         <h2>Silahkan Masuk</h2>
         <form onSubmit={handleLogin}>
@@ -53,7 +55,7 @@ const LoginPage: React.FC = () => {
         </form>
         {/* Menambahkan gambar dekoratif */}
       </div>
-    </div>
+    </Layout>
   );
 };
 

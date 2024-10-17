@@ -1,11 +1,20 @@
+"use client";
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
+import Dashboard from './dashboard/page';
 
 const HomePage: React.FC = () => {
   return (
-    <div>
-      <LoginPage />
-    </div>
+    <Router>
+      <Routes>
+        {/* Route untuk halaman login */}
+        <Route path="/" element={<LoginPage />} />
+        
+        {/* Route untuk halaman dashboard */}
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 };
 

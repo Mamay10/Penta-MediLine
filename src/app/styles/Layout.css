@@ -1,0 +1,22 @@
+.layout-container {
+  height: 100vh; /* Mengatur tinggi layout penuh */
+  width: 100vw; /* Mengatur lebar layout penuh */
+  display: flex; /* Menggunakan flexbox untuk layout */
+  background-color: #D1D5DB; /* Warna latar belakang gray (setara dengan gray-300 di Tailwind) */
+  position: relative; 
+}
+
+.logo-section {
+  width: 70%; /* Mengatur lebar bagian logo */
+  display: flex; /* Menggunakan flexbox */
+  flex-direction: column; /* Mengatur arah flex menjadi kolom */
+  justify-content: flex-start; /* Mengatur agar logo berada di bagian atas */
+  align-items: flex-start; /* Mengatur agar logo berada di kiri */
+  padding: 20px; /* Menambahkan padding untuk memberikan ruang di sekitar bagian logo */
+}
+
+.logo {
+  width: 117px; /* Atur ukuran logo sesuai kebutuhan */
+  height: 140px; /* Atur ukuran logo sesuai kebutuhan */
+  margin: 20px; /* Menambahkan margin di sekitar logo */
+}

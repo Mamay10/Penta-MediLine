@@ -1,0 +1,42 @@
+/* Dashboard.css */
+
+/* Atur ukuran tombol */
+.dashboard-button {
+    width: 350px; /* Lebar tombol */
+    height: 60px; /* Tinggi tombol */
+    background-color:#1d4a50; /* Warna latar belakang tombol */
+    color: white; /* Warna teks */
+    font-size: 20px; /* Ukuran font */
+    font-weight: bold; /* Gaya tulisan (bold) */
+    border-radius: 10px; /* Radius border untuk membuat sudut membulat */
+    box-shadow: 0 4px 6px rgba(2, 2, 2, 0.5); /* Tambahkan bayangan pada tombol */
+    transition: background-color 0.3s ease; /* Animasi saat hover */
+  }
+  
+  /* Saat tombol di-hover */
+  .dashboard-button:hover {
+    background-color: #0e605b; /* Warna tombol saat di-hover */
+  }
+  
+  /* Jarak antar tombol */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px; /* Jarak antara tombol */
+    margin-top: 150px;
+   
+}
+/* Gambar tambahan untuk halaman Dashboard */
+.extra-dashboard-image {
+    width: 330px;
+    height: 370px;
+    margin: 40px;
+  }
+  .image-section {
+    position: absolute; /* Menggunakan absolute agar bisa diatur bebas */
+    top: 20%; /* Mengatur posisi gambar dari atas, sesuaikan sesuai kebutuhan */
+    left: 25%; /* Mengatur posisi dari kanan */
+  }
+  

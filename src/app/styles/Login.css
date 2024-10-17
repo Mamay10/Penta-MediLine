@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex; /* Untuk memusatkan halaman secara vertikal dan horizontal */
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Mengatur tinggi penuh untuk memusatkan konten */
+  background-color: #f0f0f0; /* Warna latar belakang keseluruhan */
+}
+
+
+.login-card {
+  background-color: #1d4a50;
+  padding: 55px;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(2, 2, 2, 2);
+  width: 427px;
+  color: #fcfcfc;
+  display: flex; /* Menjadikan container form menggunakan flexbox */
+  flex-direction: column; /* Mengatur konten dalam bentuk kolom */
+  align-items: center; /* Memusatkan konten secara horizontal */
+
+}
+
+h2 {
+  margin-top: 5px;
+  margin-bottom: 20px; /* Jarak dari elemen berikutnya, bisa diatur */
+  text-align: center;
+  text-transform: capitalize;
+  font-size:35px; /* Mengatur ukuran teks, bisa disesuaikan */
+  font-weight: bold; /* Mengubah ketebalan teks, bisa disesuaikan */
+  display: inline-block; /* Agar tetap sebaris */
+}
+
+.input-field {
+  margin-bottom: 20px;
+  width: 360px; /* Pastikan input mengikuti lebar card */
+  
+}
+
+.input-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: bold; /* Mengubah ketebalan teks, bisa disesuaikan */
+  
+
+}
+
+.input-field input {
+  width: 100%; /* Sesuaikan lebar input dengan card */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.input-field input:focus {
+  outline: none;
+  border-color: #ddd;
+}
+
+.forgot-password {
+  text-align: right;
+  width: 100%; /* Memastikan link menyesuaikan lebar card */
+  margin-bottom: 16px;
+}
+
+.forgot-password a {
+  color: #fcfbfb;
+  font-size: 15px;
+}
+
+.login-button {
+  width: 40%;
+  padding: 5px;
+  background-color: #fffffe;
+  border: none;
+  border-radius: 10px;
+  font-size: 25px;
+  color: #00695c;
+  cursor: pointer;
+  font-weight: bold; /* Mengubah ketebalan teks, bisa disesuaikan */
+
+}
+
+.login-button:hover {
+  background-color: #99df60;
+}
+.extra-login-image {
+  width: 660px; /* Sesuaikan ukuran gambar */
+  height: auto; /* Jaga aspek rasio */
+}
+.image-section {
+  position: absolute; /* Menggunakan absolute agar bisa diatur bebas */
+  top: 70%; /* Mengatur posisi gambar dari atas, sesuaikan sesuai kebutuhan */
+  left: 50%; /* Mengatur posisi dari kiri */
+  transform: translateX(-35%); /* Menggeser gambar ke tengah horizontal */
+  transform:translateZ(-20%);
+}
+
+
+.content-section {
+  width: 50%; /* Mengatur lebar bagian konten */
+  display: flex; /* Menggunakan flexbox */
+  flex-direction: column; /* Mengatur arah flex menjadi kolom */
+  justify-content: center; /* Mengatur agar konten berada di tengah secara vertikal */
+  align-items: center; /* Mengatur agar konten berada di tengah secara horizontal */
+}
