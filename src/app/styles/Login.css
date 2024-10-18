@@ -11,10 +11,10 @@ body {
 
 .login-card {
   background-color: #1d4a50;
-  padding: 55px;
+  padding: 20px;
   border-radius: 50px;
   box-shadow: 0 4px 8px rgba(2, 2, 2, 2);
-  width: 427px;
+  width: 400px;
   color: #fcfcfc;
   display: flex; /* Menjadikan container form menggunakan flexbox */
   flex-direction: column; /* Mengatur konten dalam bentuk kolom */
@@ -29,19 +29,20 @@ h2 {
   text-transform: capitalize;
   font-size:35px; /* Mengatur ukuran teks, bisa disesuaikan */
   font-weight: bold; /* Mengubah ketebalan teks, bisa disesuaikan */
+  text-decoration: underline;
   display: inline-block; /* Agar tetap sebaris */
 }
 
 .input-field {
   margin-bottom: 20px;
-  width: 360px; /* Pastikan input mengikuti lebar card */
+  width: 300px; /* Pastikan input mengikuti lebar card */
   
 }
 
 .input-field label {
   display: block;
   margin-bottom: 8px;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold; /* Mengubah ketebalan teks, bisa disesuaikan */
   
 
@@ -49,7 +50,7 @@ h2 {
 
 .input-field input {
   width: 100%; /* Sesuaikan lebar input dengan card */
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
@@ -69,6 +70,7 @@ h2 {
 .forgot-password a {
   color: #fcfbfb;
   font-size: 15px;
+  font-weight: bold;
 }
 
 .login-button {
@@ -77,10 +79,11 @@ h2 {
   background-color: #fffffe;
   border: none;
   border-radius: 10px;
-  font-size: 25px;
+  font-size: 15px;
   color: #00695c;
   cursor: pointer;
   font-weight: bold; /* Mengubah ketebalan teks, bisa disesuaikan */
+  margin-bottom: 5px;
 
 }
 
@@ -88,15 +91,14 @@ h2 {
   background-color: #99df60;
 }
 .extra-login-image {
-  width: 660px; /* Sesuaikan ukuran gambar */
+  width: 500px; /* Sesuaikan ukuran gambar */
   height: auto; /* Jaga aspek rasio */
 }
 .image-section {
   position: absolute; /* Menggunakan absolute agar bisa diatur bebas */
-  top: 70%; /* Mengatur posisi gambar dari atas, sesuaikan sesuai kebutuhan */
-  left: 50%; /* Mengatur posisi dari kiri */
   transform: translateX(-35%); /* Menggeser gambar ke tengah horizontal */
   transform:translateZ(-20%);
+  margin-top: 50px;
 }
 
 

@@ -26,6 +26,7 @@
     align-items: center;
     gap: 35px; /* Jarak antara tombol */
     margin-top: 150px;
+    margin-right: 15px;
    
 }
 /* Gambar tambahan untuk halaman Dashboard */
@@ -37,6 +38,6 @@
   .image-section {
     position: absolute; /* Menggunakan absolute agar bisa diatur bebas */
     top: 20%; /* Mengatur posisi gambar dari atas, sesuaikan sesuai kebutuhan */
-    left: 25%; /* Mengatur posisi dari kanan */
+    left: 20%; /* Mengatur posisi dari kanan */
   }
   

@@ -7,16 +7,14 @@
 }
 
 .logo-section {
-  width: 70%; /* Mengatur lebar bagian logo */
-  display: flex; /* Menggunakan flexbox */
-  flex-direction: column; /* Mengatur arah flex menjadi kolom */
+  width: 65%; /* Mengatur lebar bagian logo */
   justify-content: flex-start; /* Mengatur agar logo berada di bagian atas */
   align-items: flex-start; /* Mengatur agar logo berada di kiri */
-  padding: 20px; /* Menambahkan padding untuk memberikan ruang di sekitar bagian logo */
+  padding: 23px; /* Menambahkan padding untuk memberikan ruang di sekitar bagian logo */
 }
 
 .logo {
-  width: 117px; /* Atur ukuran logo sesuai kebutuhan */
-  height: 140px; /* Atur ukuran logo sesuai kebutuhan */
-  margin: 20px; /* Menambahkan margin di sekitar logo */
+  width: 80px; /* Atur ukuran logo sesuai kebutuhan */
+  height: 90px; /* Atur ukuran logo sesuai kebutuhan */
+  margin-left: 15px; /* Menambahkan margin di sekitar logo */
 }
