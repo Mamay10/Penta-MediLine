@@ -1,18 +1,15 @@
+"use client";
 import React from 'react';
-import "./globals.css"; 
-
+import "../styles/regist.css"; 
+import Layout from '../components/Layout';
 const Registrasi: React.FC = () => {
   return (
-    <div className="registrasi-container">
-      <div className="logo">
-        <img src="/assets/MEDILINE LOGO.png" alt="MediLine Logo" />
-      </div>
-
+    <Layout>
       <div className="right-section">
         <button className="menu-btn">BPJS</button>
         <button className="menu-btn">NON BPJS</button>
-      </div>
-    </div>
+      </div> 
+    </Layout>
   );
 };
 
