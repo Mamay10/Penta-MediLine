@@ -18,3 +18,9 @@
   height: 90px; /* Atur ukuran logo sesuai kebutuhan */
   margin-left: 15px; /* Menambahkan margin di sekitar logo */
 }
+
+.image-section {
+  width: 600px; /* Atur ukuran logo sesuai kebutuhan */
+  height: 600px; /* Atur ukuran logo sesuai kebutuhan */
+  margin-left: 70px; /* Menambahkan margin di sekitar logo */
+}

@@ -4,22 +4,25 @@ import '../styles/setting.css';
 const SettingsPage: React.FC = () => {
   return (
     <div className="container">
-      {/* Sidebar */}
-      <aside className="sidebar">
+      {/* Logo Section (top-left) */}
+      <aside className="logoSection">
         <img src="/assets/MEDILINE LOGO.png" alt="MediLine Logo" className="logo" />
       </aside>
 
-      {/* Main content */}
-      <div className="mainContent">
-        {/* Header */}
-        <header className="header">
-          <span className="pageTitle">PENGATURAN</span>
-          <div className="userSection">
-            <span className="greeting">Halo Dewi</span>
-            <img src="/assets/profile.png" alt="User Icon" className="userIcon" />
-          </div>
-        </header>
+      {/* Header Section (spanning full width) */}
+      <header className="headerSection">
+        <img src="/assets/Vector.png" alt="Vector" className="vector" />
+        <span className="pageTitle">PENGATURAN</span>
+        <div className="userSection">
+          <span className="greeting">Halo Dewi</span>
+          <img src="/assets/profile.png" alt="User Icon" className="userIcon" />
+          <img src="/assets/log out.png" alt="log out" className="logOut" />
+        </div>
+      </header>
 
+      {/* Content Section (buttons and image) */}
+      <div className="contentContainer">
+      <div className="contentSection">
         {/* Button Section */}
         <div className="buttonContainer">
           <button className="button">User</button>
@@ -34,6 +37,7 @@ const SettingsPage: React.FC = () => {
           <img src="/assets/set.png" alt="Settings Icon" className="centerImage" />
         </div>
       </div>
+    </div>
     </div>
   );
 };

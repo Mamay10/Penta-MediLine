@@ -1,89 +1,127 @@
-/* Container for sidebar and main content */
+/* Overall container for the page */
 .container {
-    background-color: #e6e6e6;
-    height: 100vh;
-    display: flex;
-  }
-  
-  /* Sidebar styles */
-  .sidebar {
-    background-color: #255955;
-    width: 100px; /* Width of the sidebar */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .logo {
-    width: 80px;
-    height: auto;
-  }
-  
-  /* Main content (header, buttons, image) */
-  .mainContent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Header styles */
-  .header {
-    background-color: #255955;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    align-items: center;
-  }
-  
-  .pageTitle {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .userSection {
-    display: flex;
-    align-items: center;
-  }
-  
-  .greeting {
-    margin-right: 10px;
-    font-size: 18px;
-  }
-  
-  .userIcon {
-    width: 30px;
-    height: auto;
-  }
-  
-  /* Button section */
-  .buttonContainer {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .button {
-    background-color: #f2f2f2;
-    color: #000;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    margin: 0 10px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  /* Image section */
-  .imageSection {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .centerImage {
-    width: 400px;
-    height: 300px;
-  }
-  
+  background-color: #e6e6e6;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Logo Section (positioned in top-left) */
+.logoSection {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 60px;
+  height: auto;
+}
+
+/* Header Section (spanning full width, under the logo) */
+.headerSection {
+  background-color: #1D4A50;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  padding: 22px;
+  margin-left: 110px; /* Adjust to create space for the logo */
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+.vector{
+  width: 15px;
+  height: auto;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 700px;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+}
+
+.greeting {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.userIcon {
+  width: 30px;
+  height: auto;
+}
+
+.logOut{
+  width: 30px;
+  height: auto;
+  margin-left: 35px;
+}
+
+/* Content Section for buttons and image */
+.contentSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 20px;
+}
+
+.contentContainer {
+  flex: 1;
+  background-color: #1D4A50; /* Apply the background color */
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 20px;
+  border-radius: 20px; /* Optional: Rounded corners */
+  margin: 20px; /* Adjust as needed */
+}
+
+
+/* Button section */
+.buttonContainer {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 30px;
+}
+
+.button {
+  background-color: #f2f2f2;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 120px;
+  height: 40px; /* Adjust button height */
+}
+
+.button:hover{
+  background-color: #9E9696; 
+}
+
+/* Image section */
+.imageSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 370px;
+}
+
+.centerImage {
+  width: 400px;
+  height: auto;
+}
