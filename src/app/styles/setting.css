@@ -1,0 +1,89 @@
+/* Container for sidebar and main content */
+.container {
+    background-color: #e6e6e6;
+    height: 100vh;
+    display: flex;
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    background-color: #255955;
+    width: 100px; /* Width of the sidebar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 80px;
+    height: auto;
+  }
+  
+  /* Main content (header, buttons, image) */
+  .mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Header styles */
+  .header {
+    background-color: #255955;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+  }
+  
+  .pageTitle {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .userSection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .greeting {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  
+  .userIcon {
+    width: 30px;
+    height: auto;
+  }
+  
+  /* Button section */
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .button {
+    background-color: #f2f2f2;
+    color: #000;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Image section */
+  .imageSection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .centerImage {
+    width: 400px;
+    height: 300px;
+  }
+  

@@ -4,18 +4,32 @@ import "../styles/regist.css";
 import Layout from '../components/Layout';
 
 const Registrasi: React.FC = () => {
-  const [activeForm, setActiveForm] = useState<string | null>(null); // State untuk melacak form mana yang aktif (BPJS atau NON BPJS)
+  const [activeForm, setActiveForm] = useState<string | null>(null); // Melacak form yang aktif (BPJS atau NON BPJS)
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false); // Melacak status pengiriman form
 
   const handleBPJSClick = () => {
     setActiveForm("BPJS");
+    setFormSubmitted(false); // Reset status submit
   };
 
   const handleNonBPJSClick = () => {
     setActiveForm("NON BPJS");
+    setFormSubmitted(false); // Reset status submit
   };
 
   const handleCloseModal = () => {
     setActiveForm(null); // Tutup form
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulasikan pengiriman data atau panggilan API untuk menyimpan data
+    setFormSubmitted(true); // Set status form menjadi terkirim
+  };
+
+  const handleOkClick = () => {
+    setActiveForm(null); // Tutup form
+    setFormSubmitted(false); // Reset status form untuk siap digunakan kembali
   };
 
   return (
@@ -25,13 +39,13 @@ const Registrasi: React.FC = () => {
         <button className="menu-btn" onClick={handleNonBPJSClick}>NON BPJS</button>
       </div>
 
-      {/* Kondisional: Tampilkan form registrasi BPJS atau NON BPJS */}
-      {activeForm && (
+      {/* Tampilkan form registrasi BPJS atau NON BPJS */}
+      {activeForm && !formSubmitted && (
         <div className="registration-container">
           <div className="modal">
             <button className="close-btn" onClick={handleCloseModal}>X</button>
-            <h2>Registrasi {activeForm}</h2>
-            <form onSubmit={(e) => { e.preventDefault(); alert("Form submitted!"); }}>
+            <h1>Registrasi {activeForm}</h1>
+            <form onSubmit={handleFormSubmit}>
               {activeForm === "BPJS" && (
                 <>
                   <div className="form-group">
@@ -57,7 +71,7 @@ const Registrasi: React.FC = () => {
 
               {activeForm === "NON BPJS" && (
                 <>
-                   <div className="form-group">
+                  <div className="form-group">
                     <label htmlFor="cardNumber">NIK</label>
                     <input
                       type="text"
@@ -89,6 +103,17 @@ const Registrasi: React.FC = () => {
 
               <button type="submit" className="submit-btn">Submit</button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Tampilkan pesan sukses setelah form disubmit */}
+      {formSubmitted && (
+        <div className="registration-container">
+          <div className="modal">
+            <h2>Data berhasil disimpan!</h2>
+            <p>Terima kasih telah melakukan registrasi {activeForm}. Silakan klik "OK" untuk kembali.</p>
+            <button className="submit-btn" onClick={handleOkClick}>OK</button>
           </div>
         </div>
       )}

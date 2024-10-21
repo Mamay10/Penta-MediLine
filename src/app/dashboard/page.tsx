@@ -11,6 +11,10 @@ const Dashboard: React.FC = () => {
     router.push("/regist"); // Arahkan ke halaman registrasi
   };
 
+  const handleSettingClick = () => {
+    router.push("/setting"); // Arahkan ke halaman registrasi
+  };
+
   return (
     <Layout
       imageSrc="/assets/doctor.png" // Gambar utama untuk Dashboard
@@ -25,7 +29,7 @@ const Dashboard: React.FC = () => {
         </button>
         <button className="dashboard-button">Panggil Pasien</button>
         <button className="dashboard-button">Rekap</button>
-        <button className="dashboard-button">Pengaturan</button>
+        <button className="dashboard-button" onClick={handleSettingClick}>Pengaturan</button>
       </div>
     </Layout>
   );

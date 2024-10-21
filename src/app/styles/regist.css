@@ -12,7 +12,7 @@
   }
   
   .modal {
-    background-color: #205051;
+    background-color: #61A1AA;
     padding: 20px;
     border-radius: 10px;
     width: 400px;
@@ -30,10 +30,11 @@
     color: white;
   }
   
-  h2 {
+  h1 {
     text-align: center;
+    font-size: 25px;
     font-weight: bold;
-    color: white;
+    color: #1D4A50;
   }
   
   .form-group {
@@ -54,18 +55,20 @@
   }
   
   .submit-btn {
-    width: 100%;
+    width: 50%;
     padding: 10px;
-    background-color: #3B6978;
+    background-color: #1D4A50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+    margin-left: 180px;
+    margin-top: 10px;
   }
   
   .submit-btn:hover {
-    background-color: #568d9d;
+    background-color: #2e4a62;
   }
   
 .right-section {
