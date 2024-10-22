@@ -93,7 +93,8 @@
 .buttonContainer {
   display: flex;
   justify-content: start;
-  margin-bottom: 30px;
+  margin-bottom: 80px;
+  margin-left: -160px;
 }
 
 .button {
@@ -104,9 +105,14 @@
   padding: 10px 20px;
   margin: 0 10px;
   cursor: pointer;
-  font-size: 16px;
-  width: 120px;
-  height: 40px; /* Adjust button height */
+  font-size: 14px;
+  width: 100px;
+  height: 30px;
+  
+  /* Flexbox for centering text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button:hover{
