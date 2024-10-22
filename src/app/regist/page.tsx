@@ -19,7 +19,7 @@ const Registrasi: React.FC = () => {
 
   const handleCloseModal = () => {
     setActiveForm(null); // Tutup form
-  };
+  }; 
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +30,7 @@ const Registrasi: React.FC = () => {
   const handleOkClick = () => {
     setActiveForm(null); // Tutup form
     setFormSubmitted(false); // Reset status form untuk siap digunakan kembali
+    
   };
 
   return (

@@ -5,6 +5,7 @@ import LoginPage from './components/LoginPage';
 import Dashboard from './dashboard/page';
 import Registrasi from './regist/page'; // Impor halaman registrasi
 import Setting from './setting/page';
+import Display from './display/page';
 
 const HomePage: React.FC = () => {
   return (
@@ -21,6 +22,9 @@ const HomePage: React.FC = () => {
 
         {/* Route untuk halaman setting */}
         <Route path="/setting" element={<Setting />} /> {/* Rute baru */}
+
+        {/* Route untuk halaman setting */}
+        <Route path="/display" element={<Display />} /> {/* Rute baru */}
       
       </Routes>
     </Router>

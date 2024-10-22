@@ -1,0 +1,158 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  /* Header styles */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    align-items: center;
+  }
+  
+  .logo-img {
+    width: 50px;
+    margin-right: 15px;
+  }
+  .Title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 770px;
+  }
+
+  .date-time {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    margin-right: 30px;
+  }
+  
+  /* Main container to hold the left and right sections */
+  /* Main container for everything */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto; /* Pusatkan kontainer */
+    padding: 20px;
+  }
+  
+  /* Top sections: Left and Right sections side by side */
+  .top-sections {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px; /* Jarak dengan bagian bawah */
+  }
+  
+  /* Section Kiri: Queue Information */
+  .queue-main {
+    flex: 1;
+    background-color: #1D4A50;
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px; /* Lebar yang konsisten */
+    height: 280px; /* Tinggi disesuaikan */
+  }
+  
+  /* Section Kanan: Video Display */
+  .video-section {
+    flex: 2;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    width: 600px;
+    height: 300px;
+  }
+  
+  .promo-video {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+  }
+  
+  /* Section Bawah: Secondary Queue */
+  .secondary-queues {
+    display: flex;
+    justify-content: space-around; /* Sebarkan kartu secara merata */
+    margin-top: 20px;
+  }
+  
+  .queue-card {
+    background-color: #1D4A50;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    width: 120px;
+    height: 100px;
+    text-align: center;
+  }
+  
+  .queue-number, .queue-number-small {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .queue-loket, .queue-loket-small {
+    font-size: 1.2rem;
+  }
+  
+  /* Footer container */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1D4A50;
+    color: #fff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+  }
+  
+  /* Scrolling text container */
+  .scrolling-text {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 10px;
+  }
+  
+  /* Scrolling content (text) */
+  .scrolling-content {
+    display: inline-block;
+    animation: scroll 10s linear infinite;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Footer time (clock) */
+  .footer-time {
+    padding-right: 20px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  

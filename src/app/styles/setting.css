@@ -73,7 +73,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  padding: 20px;
+  padding: 5px;
 }
 
 .contentContainer {
@@ -93,6 +93,7 @@
 .buttonContainer {
   display: flex;
   justify-content: start;
+  margin-top: 5px;
   margin-bottom: 80px;
   margin-left: -160px;
 }
@@ -106,6 +107,7 @@
   margin: 0 10px;
   cursor: pointer;
   font-size: 14px;
+  font-family: Poppins;
   width: 100px;
   height: 30px;
   
