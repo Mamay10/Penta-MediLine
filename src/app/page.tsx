@@ -25,6 +25,9 @@ const HomePage: React.FC = () => {
 
         {/* Route untuk halaman setting */}
         <Route path="/display" element={<Display />} /> {/* Rute baru */}
+
+        {/* Route untuk halaman setting */}
+        <Route path="/rekap" element={<Display />} /> {/* Rute baru */}
       
       </Routes>
     </Router>

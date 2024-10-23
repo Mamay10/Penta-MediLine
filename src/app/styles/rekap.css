@@ -1,0 +1,160 @@
+/* Overall container for the page */
+.container {
+    background-color: #e6e6e6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Logo Section (positioned in top-left) */
+  .logoSection {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 60px;
+    height: auto;
+  }
+  
+  /* Header Section (spanning full width, under the logo) */
+  .headerSection {
+    background-color: #1D4A50;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    padding: 22px;
+    margin-left: 110px; /* Adjust to create space for the logo */
+    margin-right: 20px;
+    margin-top: 5px;
+  }
+  
+  .vector{
+    width: 15px;
+    height: auto;
+  }
+  
+  .pageTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 800px;
+  }
+  
+  .userSection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .greeting {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  
+  .userIcon {
+    width: 30px;
+    height: auto;
+  }
+  
+  .logOut{
+    width: 30px;
+    height: auto;
+    margin-left: 35px;
+  }
+  
+  .contentSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 5px;
+  }
+  
+  .contentContainer {
+    flex: 1;
+    background-color: #1D4A50; /* Apply the background color */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    padding: 20px;
+    border-radius: 20px; /* Optional: Rounded corners */
+    margin: 20px; /* Adjust as needed */
+  }
+  
+  .rekapContainer {
+    width: 100%;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  /* Flexbox styling for filter section */
+  .filter-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Flex left side of filter inputs */
+  .filter-section-left {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Individual input group for label and input */
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Download button */
+  .download-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .download-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Table container with white background */
+  .table-wrapper {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-container {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-container th, .table-container td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table-container th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .empty-message {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+  }

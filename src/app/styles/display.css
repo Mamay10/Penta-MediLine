@@ -16,7 +16,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    padding: 10px 20px;
+    padding: 8px 16px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
   
@@ -41,83 +41,75 @@
     margin-right: 30px;
   }
   
-  /* Main container to hold the left and right sections */
-  /* Main container for everything */
-.main-container {
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    margin: 0 auto; /* Pusatkan kontainer */
-    padding: 20px;
-  }
-  
-  /* Top sections: Left and Right sections side by side */
-  .top-sections {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 20px; /* Jarak dengan bagian bawah */
-  }
-  
-  /* Section Kiri: Queue Information */
-  .queue-main {
-    flex: 1;
-    background-color: #1D4A50;
-    color: white;
-    padding: 20px;
-    border-radius: 20px;
-    width: 300px; /* Lebar yang konsisten */
-    height: 280px; /* Tinggi disesuaikan */
-  }
-  
-  /* Section Kanan: Video Display */
-  .video-section {
-    flex: 2;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 20px;
-    width: 600px;
-    height: 300px;
-  }
-  
-  .promo-video {
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-  }
-  
-  /* Section Bawah: Secondary Queue */
-  .secondary-queues {
-    display: flex;
-    justify-content: space-around; /* Sebarkan kartu secara merata */
+  .main-container {
+    display: flex; /* Mengatur container utama menjadi flexbox */
+    height: 80vh; /* Tinggi keseluruhan container diatur ke 100vh */
     margin-top: 20px;
   }
   
-  .queue-card {
-    background-color: #1D4A50;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    width: 120px;
-    height: 100px;
-    text-align: center;
+  .left-section {
+    display: flex;
+    flex-direction: column; /* Mengatur item dalam kolom (atas ke bawah) */
+    flex: 0 0 650px; /* Lebar bagian kiri tetap 250px */
+    padding: 20px; /* Menambahkan padding di dalam left-section */
+    background-color: #f8f9fa; /* Warna latar belakang untuk visual */
+    height: 90%; /* Tinggi mengikuti tinggi container utama */
+    border-radius: 8px; /* Membuat sudut bulat */
+    margin-right: 20px; /* Jarak antara bagian kiri dan kanan */
   }
   
-  .queue-number, .queue-number-small {
-    font-size: 1.8rem;
+  .queue-main {
+    margin-bottom: 20px; /* Jarak antara main queue dan secondary queue */
+  }
+  
+  .secondary-queues {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1; /* Mengambil ruang yang ada */
+  }
+  
+  .right-section {
+    flex-grow: 1; /* Bagian kanan dapat tumbuh untuk mengambil ruang yang ada */
+    display: flex; /* Mengatur bagian kanan menjadi flexbox */
+    height: 100%; /* Tinggi mengikuti tinggi container utama */
+  }
+  
+  .video-section {
+    flex: 1; /* Mengambil seluruh ruang yang ada di bagian kanan */
+    display: flex; /* Mengatur video section menjadi flexbox */
+    justify-content: center; /* Memusatkan video */
+    align-items: center; /* Memusatkan video secara vertikal */
+  }
+  
+  .promo-video {
+    width: 100%; /* Video mengambil seluruh lebar container kanan */
+    height: auto; /* Tinggi video otomatis berdasarkan lebar */
+    margin-right: 20px;
+    margin-bottom: 50px;
+    border-radius: 8px;
+  }
+  
+  .queue-card {
+    flex: 1 1 45%; /* Responsif */
+    margin: 10px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+  }
+  
+  .queue-number,
+  .queue-number-small,
+  .queue-loket,
+  .queue-loket-small {
     font-weight: bold;
   }
-  
-  .queue-loket, .queue-loket-small {
-    font-size: 1.2rem;
-  }
-  
+
   /* Footer container */
 .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1D4A50;
+    background-color: #61A1AA;
     color: #fff;
     padding: 10px;
     position: fixed;
