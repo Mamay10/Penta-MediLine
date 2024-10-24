@@ -21,25 +21,30 @@ const DisplayScreen: React.FC = () => {
   <div className="left-section">
     {/* Container Atas: Main Queue */}
     <div className="queue-main">
-      <h2>POLI UMUM</h2>
+    <div className="card-main">
+    <button className="queue-main-button">POLI UMUM</button>
       <div className="queue-number">BA01</div>
       <div className="queue-loket">LOKET 1</div>
+    </div>
     </div>
 
     {/* Container Bawah: Secondary Queue */}
     <div className="secondary-queues">
       <div className="queue-card">
-        <h3>POLI UMUM</h3>
-        <div className="queue-number-small">A01</div>
-        <div className="queue-loket-small">LOKET 1</div>
-      </div>
+  <div className="card">
+  <button className="queue-button">POLI UMUM</button>
+    <div className="queue-number-small">A01</div>
+    <div className="queue-loket-small">LOKET 1</div>
+  </div>
+</div>
+
       <div className="queue-card">
-        <h3>POLI UMUM</h3>
+      <button className="queue-button">POLI UMUM</button>
         <div className="queue-number-small">A02</div>
         <div className="queue-loket-small">LOKET 2</div>
       </div>
       <div className="queue-card">
-        <h3>POLI THT</h3>
+      <button className="queue-button">POLI UMUM</button>
         <div className="queue-number-small">BA02</div>
         <div className="queue-loket-small">LOKET 2</div>
       </div>
@@ -55,7 +60,7 @@ const DisplayScreen: React.FC = () => {
   <div className="right-section">
     <div className="video-section">
       <video className="promo-video" controls autoPlay loop>
-        <source src="video1.mp4" type="video/mp4" />
+        <source src="/assets/play.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>

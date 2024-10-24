@@ -7,7 +7,7 @@
   
   body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
+    background-color: #D4D3D3;
   }
   
   /* Header styles */
@@ -15,7 +15,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
+    background-color: #D4D3D3;
     padding: 8px 16px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
@@ -50,9 +50,9 @@
   .left-section {
     display: flex;
     flex-direction: column; /* Mengatur item dalam kolom (atas ke bawah) */
-    flex: 0 0 650px; /* Lebar bagian kiri tetap 250px */
+    flex: 0 0 550px; /* Lebar bagian kiri tetap 250px */
     padding: 20px; /* Menambahkan padding di dalam left-section */
-    background-color: #f8f9fa; /* Warna latar belakang untuk visual */
+    background-color: #D4D3D3; /* Warna latar belakang untuk visual */
     height: 90%; /* Tinggi mengikuti tinggi container utama */
     border-radius: 8px; /* Membuat sudut bulat */
     margin-right: 20px; /* Jarak antara bagian kiri dan kanan */
@@ -60,8 +60,40 @@
   
   .queue-main {
     margin-bottom: 20px; /* Jarak antara main queue dan secondary queue */
+    color: white;
   }
   
+  .card-main {
+    flex: 1 1 20%; /* Responsif */
+    width: 250px;
+    height: 220px;
+    margin: 5px;
+    margin-left: 130px;
+    padding: 10px;
+    background-color: #1D4A50;
+    border-radius: 8px;
+    color: white;
+  }
+
+  .queue-main-button {
+    background-color: #D9D9D9;
+    color: black;
+    width: 200px;
+    height: 30px;
+    padding: 0 20px;
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-left: 15px;
+    line-height: 25px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+
   .secondary-queues {
     display: flex;
     flex-wrap: wrap;
@@ -90,18 +122,51 @@
   }
   
   .queue-card {
-    flex: 1 1 45%; /* Responsif */
-    margin: 10px;
+    flex: 1 1 20%; /* Responsif */
+    height: 140px;
+    margin: 5px;
     padding: 10px;
-    background-color: #e9ecef;
+    background-color: #1D4A50;
     border-radius: 8px;
+    color: white;
+  }
+
+  .queue-button {
+    background-color: #D9D9D9;
+    color: black;
+    padding: 0 20px;  /* Adjust padding to avoid affecting height */
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    height: 25px;
+    line-height: 25px;  /* Vertically center text */
+    cursor: pointer;
+    text-align: center;  /* Horizontally center text */
+    transition: background-color 0.3s ease;
+    display: inline-block;
   }
   
-  .queue-number,
-  .queue-number-small,
-  .queue-loket,
-  .queue-loket-small {
+  
+  .queue-number{
+    color: white;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 90px;
+  }
+  .queue-number-small{
+    color: white;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 35px;
+  }
+  .queue-loket{
+    color: white;
+    text-align: center;
     font-weight: bold;
+  }
+  .queue-loket-small {
+    color: white;
+    text-align: center;
   }
 
   /* Footer container */

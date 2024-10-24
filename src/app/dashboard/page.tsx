@@ -14,6 +14,12 @@ const Dashboard: React.FC = () => {
   const handleSettingClick = () => {
     router.push("/setting"); // Arahkan ke halaman registrasi
   };
+  const handleAntrianClick = () => {
+    router.push("/antrian"); // Arahkan ke halaman registrasi
+  };
+  const handleRekapClick = () => {
+    router.push("/rekap"); // Arahkan ke halaman registrasi
+  };
 
   return (
     <Layout
@@ -27,8 +33,8 @@ const Dashboard: React.FC = () => {
         <button className="dashboard-button" onClick={handleRegistrasiClick}>
           Registrasi
         </button>
-        <button className="dashboard-button">Panggil Pasien</button>
-        <button className="dashboard-button">Rekap</button>
+        <button className="dashboard-button" onClick={handleAntrianClick}>Panggil Pasien</button>
+        <button className="dashboard-button" onClick={handleRekapClick}>Rekap</button>
         <button className="dashboard-button" onClick={handleSettingClick}>Pengaturan</button>
       </div>
     </Layout>
