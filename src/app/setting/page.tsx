@@ -25,7 +25,9 @@ const SettingsPage: React.FC = () => {
       <div className="contentSection">
         {/* Button Section */}
         <div className="buttonContainer">
-          <button className="button">User</button>
+          <button className="button">
+          <a href="/user">User</a>
+          </button>
           <button className="button">Status</button>
           <button className="button">Antrian</button>
           <button className="button">Jadwal</button>

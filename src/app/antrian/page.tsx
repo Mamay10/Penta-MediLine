@@ -5,19 +5,18 @@ import '../styles/queue.css';
 const AntrianPage: React.FC = () => {
   return (
     <div className="container">
-      {/* Logo Section (top-left) */}
-      <aside className="logoSection">
-        <img src="/assets/MediLine Logo.png" alt="MediLine Logo" className="logo" />
+       <aside className="logoSection">
+        <img src="/assets/MEDILINE LOGO.png" alt="MediLine Logo" className="logo" />
       </aside>
 
       {/* Header Section (spanning full width) */}
       <header className="headerSection">
         <img src="/assets/Vector.png" alt="Vector" className="vector" />
-        <span className="pageTitle">PANGGIL ANTRIAN</span>
+        <span className="pageTitle"> PANGGIL ANTRIAN</span>
         <div className="userSection">
           <span className="greeting">Halo Dewi</span>
           <img src="/assets/profile.png" alt="User Icon" className="userIcon" />
-          <img src="/assets/Log out.png" alt="log out" className="logOut" />
+          <img src="/assets/log out.png" alt="log out" className="logOut" />
         </div>
       </header>
 
@@ -45,7 +44,7 @@ const AntrianPage: React.FC = () => {
                 <td>Mamcy A. Lestari</td>
                 <td>08:00 - 08:30</td>
               </tr>
-              {/* Tambahkan baris lainnya */}
+           
             </tbody>
           </table>
         </div>

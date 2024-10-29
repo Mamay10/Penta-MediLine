@@ -101,6 +101,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    color: black;
   }
   
   /* Flex left side of filter inputs */
@@ -113,20 +114,23 @@
   .input-group {
     display: flex;
     flex-direction: column;
+    margin-left: 50px;
   }
   
   /* Download button */
   .download-button {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #87CFD9;
+    color: black;
     border: none;
+    justify-content: end;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 460px;
   }
   
   .download-button:hover {
-    background-color: #0056b3;
+    background-color: #7DABB1;
   }
   
   /* Table container with white background */
@@ -135,6 +139,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
   }
   
   .table-container {
@@ -149,8 +154,8 @@
   }
   
   .table-container th {
-    background-color: #007bff;
-    color: white;
+    background-color: #D9D9D9;
+    color: black;
   }
   
   .empty-message {

@@ -5,16 +5,22 @@ const DisplayScreen: React.FC = () => {
     
   return (
     <div className="display-screen">
-      {/* Header */}
-      <header className="header">
-        <div className="logo">
-        <img src="/assets/MEDILINE LOGO.png" alt="Mediline Logo" className="logo-img" />
-        </div>
-        <span className="Title">Klinik MediLine</span>
-        <div className="date-time">
-            <p>Senin, 09/10/2024</p>
+    {/* Logo Section (top-left) */}
+      <aside className="logoSection">
+        <img src="/assets/MEDILINE LOGO.png" alt="MediLine Logo" className="logo" />
+      </aside>
+
+      {/* Header Section (spanning full width) */}
+      <header className="headerSection">
+        <img src="/assets/Vector.png" alt="Vector" className="vector" />
+        <span className="pageTitle">REKAP</span>
+        <div className="userSection">
+          <span className="greeting">Halo Dewi</span>
+          <img src="/assets/profile.png" alt="User Icon" className="userIcon" />
+          <img src="/assets/log out.png" alt="log out" className="logOut" />
         </div>
       </header>
+
 
   <div className="main-container">
   {/* Section Kiri: Container untuk Main Queue dan Secondary Queue */}
@@ -47,11 +53,6 @@ const DisplayScreen: React.FC = () => {
       <button className="queue-button">POLI UMUM</button>
         <div className="queue-number-small">BA02</div>
         <div className="queue-loket-small">LOKET 2</div>
-      </div>
-      <div className="queue-card">
-        <h3>-</h3>
-        <div className="queue-number-small">--</div>
-        <div className="queue-loket-small">--</div>
       </div>
     </div>
   </div>

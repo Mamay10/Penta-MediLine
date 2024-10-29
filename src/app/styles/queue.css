@@ -34,20 +34,24 @@
   margin-top: 5px;
 }
 
-.vector {
+.vector{
   width: 15px;
   height: auto;
+  margin-right: 10px;
 }
 
 .pageTitle {
   font-size: 24px;
   font-weight: bold;
-  margin-right: 700px;
+  margin-right: 660px;
+  white-space: nowrap; /* Agar teks tetap dalam satu baris */
 }
 
 .userSection {
   display: flex;
   align-items: center;
+  white-space: nowrap; /* Agar teks tetap dalam satu baris */
+  /* margin-left: 10px; */
 }
 
 .greeting {
@@ -60,13 +64,20 @@
   height: auto;
 }
 
-.logOut {
+.logOut{
   width: 30px;
   height: auto;
   margin-left: 35px;
 }
 
-/* Content Section */
+.contentSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 5px;
+}/* Content Section */
 .contentContainer {
   flex: 1;
   background-color: #1D4A50;

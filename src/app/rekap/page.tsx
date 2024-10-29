@@ -22,9 +22,6 @@ const SettingsPage: React.FC = () => {
 
       {/* Content Section */}
       <div className="contentContainer">
-        <div className="contentSection">
-          {/* Rekap Section */}
-          <div className="rekapContainer">
             {/* Filter Section */}
             <div className="filter-section">
               <div className="filter-section-left">
@@ -48,6 +45,8 @@ const SettingsPage: React.FC = () => {
               <button className="download-button">Unduh Rekap</button>
             </div>
 
+            <div className="rekapContainer">
+            <div className="contentSection">
             {/* Table Section */}
             <div className="table-wrapper">
               <table className="table-container">
