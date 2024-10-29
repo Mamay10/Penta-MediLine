@@ -51,8 +51,9 @@ const SettingsPage: React.FC = () => {
         </div>
 
         <div style={{ display: "flex", padding: "5px" }}>
-      <div style={{ flex: 1, paddingRight: "20px" }}>
-        <button style={{ marginBottom: "10px" }}>+ Tambah User</button>
+        <div style={{ flex: 1, paddingRight: "20px" }}>
+        <button style={{ marginBottom: "10px", marginRight: "10px" }}>+ Tambah Dokter</button>
+        <button style={{ marginBottom: "10px" }}>+ Tambah Poli</button>
         <table>
           <thead>
             <tr>

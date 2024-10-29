@@ -2,20 +2,21 @@
 import React, { useState } from "react";
 import '../styles/user.css';
 
-interface User {
-    nomor: number;
-    username: string;
-    password: string;
+interface Status {
+    nomor?: number;
+    status?: string;
+    kode?: string;
+    durasi?: string;
 }
 
 const SettingsPage: React.FC = () => {
-    const [users, setUsers] = useState<User[]>([
-        { nomor: 1, username: "Mamay Ayu Lestari", password: "123456" },
-        { nomor: 2, username: "Kholidiyah Amna", password: "amal2023" },
-        { nomor: 3, username: "Salsabila Shafiya", password: "caca" },
-        { nomor: 4, username: "Anisa Putri", password: "098765" },
-        { nomor: 5, username: "Mila Amelia", password: "amel678" },
-        { nomor: 6, username: "Laras", password: "laras567" },
+    const [users, setUsers] = useState<Status[]>([
+        { nomor: 1, status: 'Active', kode: 'A001', durasi: '10 mins' },
+        { nomor: 2, status: 'Inactive', kode: 'A002', durasi: '15 mins' },
+        { nomor: 3, status: 'Pending', kode: 'A003', durasi: '5 mins' },
+        { nomor: 4, status: '', kode: '', durasi: '' },
+        { nomor: 5, status: '', kode: '', durasi: '' },
+        { nomor: 6, status: '', kode: '', durasi: '' },
       ]);
     
   return (
@@ -52,21 +53,23 @@ const SettingsPage: React.FC = () => {
 
         <div style={{ display: "flex", padding: "5px" }}>
       <div style={{ flex: 1, paddingRight: "20px" }}>
-        <button style={{ marginBottom: "10px" }}>+ Tambah User</button>
+        <button style={{ marginBottom: "10px" }}>+ Tambah Status</button>
         <table>
           <thead>
             <tr>
               <th>Nomor</th>
-              <th>Username</th>
-              <th>Password</th>
+              <th>Status</th>
+              <th>Kode</th>
+              <th>Durasi</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user.nomor}>
-                <td>{user.nomor}</td>
-                <td>{user.username}</td>
-                <td>{user.password}</td>
+            {users.map((status) => (
+              <tr key={status.nomor}>
+                <td>{status.nomor || "-"}</td>
+                <td>{status.status || "-"}</td>
+                <td>{status.kode || "-"}</td>
+                <td>{status.durasi || "-"}</td>
               </tr>
             ))}
           </tbody>
@@ -77,53 +80,26 @@ const SettingsPage: React.FC = () => {
       <form>
         <div className="form-row">
           <div className="form-group">
-            <label>Username*</label>
-            <input type="text" placeholder="Masukkan Username" />
+            <label>Status*</label>
+            <input type="text" placeholder="Masukkan Status" />
           </div>
           <div className="form-group">
-            <label>Nama lengkap</label>
-            <input type="text" placeholder="Masukkan Nama Lengkap" />
-          </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Password*</label>
-            <input type="password" placeholder="Masukkan Password" />
-          </div>
-          <div className="form-group">
-            <label>Tanggal Lahir*</label>
-            <input type="date" />
+            <label>Durasi*</label>
+            <input type="text" placeholder="Masukkan Durasi" />
           </div>
         </div>
 
         <div className="form-row">
           <div className="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="Masukkan Email" />
-          </div>
-          <div className="form-group">
-            <label>No. Telp*</label>
-            <input type="tel" placeholder="Masukkan No. Telepon" />
+            <label>Kode</label>
+            <input type="text" placeholder="Masukkan Kode" />
           </div>
         </div>
 
         <div className="form-row">
           <div className="form-group">
-            <label>Jenis Kelamin</label>
-            <div className="radio-group">
-              <input type="radio" name="gender" value="Laki-laki" /> Laki-laki
-              <input type="radio" name="gender" value="Perempuan" /> Perempuan
-            </div>
-          </div>
-          <div className="form-group">
-            <label>Role</label>
-            <select>
-              <option>Pilih Role</option>
-              <option>Loket 1</option>
-              <option>Loket 2</option>
-              {/* Additional options can be added here */}
-            </select>
+            <label>Nama Lain</label>
+            <input type="text" placeholder="Masukkan Nama Lain" />
           </div>
         </div>
 
