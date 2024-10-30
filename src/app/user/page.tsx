@@ -91,10 +91,16 @@ const SettingsPage: React.FC = () => {
             <label>Password*</label>
             <input type="password" placeholder="Masukkan Password" />
           </div>
-          <div className="form-group">
+          <div className="form-row">
+            <div className="form-group">
+             <label>No. Telp*</label>
+             <input type="tel" placeholder="Masukkan No. Telepon" />
+            </div>
+            <div className="form-group">
             <label>Tanggal Lahir*</label>
             <input type="date" />
-          </div>
+            </div>
+        </div>
         </div>
 
         <div className="form-row">
@@ -102,13 +108,7 @@ const SettingsPage: React.FC = () => {
             <label>Email</label>
             <input type="email" placeholder="Masukkan Email" />
           </div>
-          <div className="form-group">
-            <label>No. Telp*</label>
-            <input type="tel" placeholder="Masukkan No. Telepon" />
-          </div>
-        </div>
-
-        <div className="form-row">
+          <div className="form-row">
           <div className="form-group">
             <label>Jenis Kelamin</label>
             <div className="radio-group">
@@ -125,7 +125,9 @@ const SettingsPage: React.FC = () => {
               {/* Additional options can be added here */}
             </select>
           </div>
+        </div> 
         </div>
+
 
         <div className="button-group">
           <button type="button" className="cancel-button">Batal</button>
