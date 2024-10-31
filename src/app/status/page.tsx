@@ -45,10 +45,18 @@ const SettingsPage: React.FC = () => {
           <button className="button">
           <a href="/user">User</a>
           </button>
-          <button className="button">Status</button>
-          <button className="button">Antrian</button>
-          <button className="button">Jadwal</button>
-          <button className="button">Loket</button>
+          <button className="button">
+          <a href="/status">Status</a>
+          </button>
+          <button className="button">
+          <a href="/setAntrian">Antrian</a>
+          </button>
+          <button className="button">
+          <a href="/jadwal">Jadwal</a>
+          </button>
+          <button className="button">
+          <a href="/loket">Loket</a>
+          </button>
         </div>
 
         <div style={{ display: "flex", padding: "5px" }}>

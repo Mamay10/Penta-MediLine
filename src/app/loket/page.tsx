@@ -2,20 +2,20 @@
 import React, { useState } from "react";
 import '../styles/user.css';
 
-interface User {
+interface Loket {
     nomor: number;
-    username: string;
-    password: string;
+    nama: string;
+    jenis: string;
 }
 
 const SettingsPage: React.FC = () => {
-    const [users, setUsers] = useState<User[]>([
-        { nomor: 1, username: "Mamay Ayu Lestari", password: "123456" },
-        { nomor: 2, username: "Kholidiyah Amna", password: "amal2023" },
-        { nomor: 3, username: "Salsabila Shafiya", password: "caca" },
-        { nomor: 4, username: "Anisa Putri", password: "098765" },
-        { nomor: 5, username: "Mila Amelia", password: "amel678" },
-        { nomor: 6, username: "Laras", password: "laras567" },
+    const [users, setUsers] = useState<Loket[]>([
+        { nomor: 1, nama: "Loket 1", jenis: "BPJS" },
+        { nomor: 2, nama: "Loket 2", jenis: "BPJS" },
+        { nomor: 3, nama: "Loket 3", jenis: "NON BPJS" },
+        { nomor: 4, nama: "Loket 4", jenis: "BPJS" },
+        { nomor: 5, nama: "Loket 5", jenis: "NON BPJS" },
+        { nomor: 6, nama: "Loket 6", jenis: "NON BPJS" },
       ]);
     
   return (
@@ -44,29 +44,37 @@ const SettingsPage: React.FC = () => {
           <button className="button">
           <a href="/user">User</a>
           </button>
-          <button className="button">Status</button>
-          <button className="button">Antrian</button>
-          <button className="button">Jadwal</button>
-          <button className="button">Loket</button>
+          <button className="button">
+          <a href="/status">Status</a>
+          </button>
+          <button className="button">
+          <a href="/setAntrian">Antrian</a>
+          </button>
+          <button className="button">
+          <a href="/jadwal">Jadwal</a>
+          </button>
+          <button className="button">
+          <a href="/loket">Loket</a>
+          </button>
         </div>
 
         <div style={{ display: "flex", padding: "5px" }}>
       <div style={{ flex: 1, paddingRight: "20px" }}>
-        <button style={{ marginBottom: "10px" }}>+ Tambah User</button>
+        <button style={{ marginBottom: "10px" }}>+ Tambah Loket</button>
         <table>
           <thead>
             <tr>
               <th>Nomor</th>
-              <th>Username</th>
-              <th>Password</th>
+              <th>Nama</th>
+              <th>Jenis</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user.nomor}>
                 <td>{user.nomor}</td>
-                <td>{user.username}</td>
-                <td>{user.password}</td>
+                <td>{user.nama}</td>
+                <td>{user.jenis}</td>
               </tr>
             ))}
           </tbody>
@@ -77,53 +85,40 @@ const SettingsPage: React.FC = () => {
       <form>
         <div className="form-row">
           <div className="form-group">
-            <label>Username*</label>
-            <input type="text" placeholder="Masukkan Username" />
+            <label>Kode*</label>
+            <input type="text" placeholder="Masukkan Kode" />
           </div>
           <div className="form-group">
-            <label>Nama lengkap</label>
-            <input type="text" placeholder="Masukkan Nama Lengkap" />
-          </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Password*</label>
-            <input type="password" placeholder="Masukkan Password" />
-          </div>
-          <div className="form-group">
-            <label>Tanggal Lahir*</label>
-            <input type="date" />
-          </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="Masukkan Email" />
-          </div>
-          <div className="form-group">
-            <label>No. Telp*</label>
-            <input type="tel" placeholder="Masukkan No. Telepon" />
-          </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Jenis Kelamin</label>
-            <div className="radio-group">
-              <input type="radio" name="gender" value="Laki-laki" /> Laki-laki
-              <input type="radio" name="gender" value="Perempuan" /> Perempuan
-            </div>
-          </div>
-          <div className="form-group">
-            <label>Role</label>
+            <label>Klinik</label>
             <select>
-              <option>Pilih Role</option>
-              <option>Loket 1</option>
-              <option>Loket 2</option>
+              <option>Pilih Klinik</option>
+              <option>Poli Umum</option>
+              <option>Poli Gigi</option>
               {/* Additional options can be added here */}
             </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>Nama</label>
+            <input type="text" placeholder="Masukkan Nama" />
+          </div>
+          <div className="form-group">
+          <label>Jenis Loket</label>
+          <select>
+              <option>Pilih Jenis Loket</option>
+              <option>BPJS</option>
+              <option>NON BPJS</option>
+              {/* Additional options can be added here */}
+            </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>Kode Antrian</label>
+            <input type="text" placeholder="Masukkan Kode Antrian" />
           </div>
         </div>
 
