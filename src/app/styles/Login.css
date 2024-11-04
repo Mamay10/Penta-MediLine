@@ -4,7 +4,6 @@ body {
   display: flex; /* Untuk memusatkan halaman secara vertikal dan horizontal */
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Mengatur tinggi penuh untuk memusatkan konten */
   background-color: #f0f0f0; /* Warna latar belakang keseluruhan */
 }
 

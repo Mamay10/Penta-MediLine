@@ -236,6 +236,9 @@
     font-size: 0.9rem;
     color: #214b56;
   }
+  .form-group input{
+    height: 35px;
+  }
   
   .radio-group {
     display: flex;
@@ -276,3 +279,4 @@
   .save-button:hover {
     background-color: #3aa9ad;
   }
+  

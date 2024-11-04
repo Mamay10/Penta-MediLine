@@ -4,21 +4,11 @@ import '../styles/display.css';
 const DisplayScreen: React.FC = () => {
     
   return (
-    <div className="display-screen">
-    {/* Logo Section (top-left) */}
-      <aside className="logoSection">
-        <img src="/assets/MEDILINE LOGO.png" alt="MediLine Logo" className="logo" />
-      </aside>
-
-      {/* Header Section (spanning full width) */}
-      <header className="headerSection">
-        <img src="/assets/Vector.png" alt="Vector" className="vector" />
-        <span className="pageTitle">REKAP</span>
-        <div className="userSection">
-          <span className="greeting">Halo Dewi</span>
-          <img src="/assets/profile.png" alt="User Icon" className="userIcon" />
-          <img src="/assets/log out.png" alt="log out" className="logOut" />
-        </div>
+    <div className="container">
+      <header className="header">
+        <img src="/assets/MEDILINE LOGO.png" alt="Clinic Logo" className="logo" />
+        <h1>KLINIK MEDILINE</h1>
+        <div className="date">Senin, 09/10/2024</div>
       </header>
 
 
@@ -61,7 +51,7 @@ const DisplayScreen: React.FC = () => {
   <div className="right-section">
     <div className="video-section">
       <video className="promo-video" controls autoPlay loop>
-        <source src="/assets/play.mp4" type="video/mp4" />
+        <source src="/assets/videoplayback.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>

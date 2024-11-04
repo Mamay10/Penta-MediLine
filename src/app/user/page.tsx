@@ -8,7 +8,7 @@ interface User {
     password: string;
 }
 
-const SettingsPage: React.FC = () => {
+const UserPage: React.FC = () => {
     const [users, setUsers] = useState<User[]>([
         { nomor: 1, username: "Mamay Ayu Lestari", password: "123456" },
         { nomor: 2, username: "Kholidiyah Amna", password: "amal2023" },
@@ -128,8 +128,8 @@ const SettingsPage: React.FC = () => {
             <label>Role</label>
             <select>
               <option>Pilih Role</option>
-              <option>Loket 1</option>
-              <option>Loket 2</option>
+              <option>Dokter</option>
+              <option>Teller</option>
               {/* Additional options can be added here */}
             </select>
           </div>
@@ -151,4 +151,4 @@ const SettingsPage: React.FC = () => {
   );
 };
 
-export default SettingsPage;
+export default UserPage;
