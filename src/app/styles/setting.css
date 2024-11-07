@@ -74,6 +74,7 @@
   align-items: center;
   justify-content: start;
   padding: 5px;
+  align-items: flex-start; /* Posisi button di kanan */
 }
 
 .contentContainer {
@@ -94,8 +95,9 @@
   display: flex;
   justify-content: start;
   margin-top: 5px;
-  margin-bottom: 80px;
-  margin-left: -160px;
+  margin-bottom: 20px;
+  margin-right: 100px;
+  
 }
 
 .button {
@@ -133,3 +135,4 @@
   width: 400px;
   height: auto;
 }
+

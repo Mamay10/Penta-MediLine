@@ -1,0 +1,23 @@
+/* mainlayout.css */
+.container {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .logoSection {
+    flex: 0 0 200px;
+  }
+  
+  .contentContainer {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .contentSection {
+    display: flex;
+    flex-direction: column;
+  }
+  

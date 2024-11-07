@@ -1,153 +1,152 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import '../styles/user.css';
+import MainLayout from "../setting/MainLayout";
 
 interface User {
-    nomor: number;
-    username: string;
-    password: string;
+  nomor: number;
+  username: string;
+  password: string;
 }
 
 const UserPage: React.FC = () => {
-    const [users, setUsers] = useState<User[]>([
-        { nomor: 1, username: "Mamay Ayu Lestari", password: "123456" },
-        { nomor: 2, username: "Kholidiyah Amna", password: "amal2023" },
-        { nomor: 3, username: "Salsabila Shafiya", password: "caca" },
-        { nomor: 4, username: "Anisa Putri", password: "098765" },
-        { nomor: 5, username: "Mila Amelia", password: "amel678" },
-        { nomor: 6, username: "Laras", password: "laras567" },
-      ]);
-    
+  const [users, setUsers] = useState<User[]>([
+    { nomor: 1, username: "Mamay Ayu Lestari", password: "123456" },
+    { nomor: 2, username: "Kholidiyah Amna", password: "amal2023" },
+    { nomor: 3, username: "Salsabila Shafiya", password: "caca" },
+    { nomor: 4, username: "Anisa Putri", password: "098765" },
+    { nomor: 5, username: "Mila Amelia", password: "amel678" },
+    { nomor: 6, username: "Laras", password: "laras567" },
+  ]);
+
+  // State untuk mengontrol visibilitas form
+  const [isFormVisible, setFormVisible] = useState(false);
+
+  // Toggle visibilitas form
+  const toggleForm = () => {
+    setFormVisible(!isFormVisible);
+  };
+
   return (
-    <div className="container">
-      {/* Logo Section (top-left) */}
-      <aside className="logoSection">
-        <img src="/assets/MEDILINE LOGO.png" alt="MediLine Logo" className="logo" />
-      </aside>
+    <MainLayout>
+      {/* Kontainer untuk tombol dan kontainer utama */}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {/* Tombol Tambah User */}
+        <button
+          onClick={toggleForm}
+          style={{
+            marginBottom:"15px",
+            alignSelf: "flex-start",
+            padding: "6px 6px", // Padding standar tombol
+          }}
+        >
+          &#43; Tambah User
+        </button>
 
-      {/* Header Section (spanning full width) */}
-      <header className="headerSection">
-        <img src="/assets/Vector.png" alt="Vector" className="vector" />
-        <span className="pageTitle">PENGATURAN</span>
-        <div className="userSection">
-          <span className="greeting">Halo Dewi</span>
-          <img src="/assets/profile.png" alt="User Icon" className="userIcon" />
-          <img src="/assets/log out.png" alt="log out" className="logOut" />
-        </div>
-      </header>
-
-      {/* Content Section (buttons and image) */}
-      <div className="contentContainer">
-      <div className="contentSection">
-        {/* Button Section */}
-        <div className="buttonContainer">
-          <button className="button">
-          <a href="/user">User</a>
-          </button>
-          <button className="button">
-          <a href="/status">Status</a>
-          </button>
-          <button className="button">
-          <a href="/setAntrian">Antrian</a>
-          </button>
-          <button className="button">
-          <a href="/jadwal">Jadwal</a>
-          </button>
-          <button className="button">
-          <a href="/loket">Loket</a>
-          </button>
-        </div>
-        
-        <div style={{ display: "flex", padding: "5px" }}>
-      <div style={{ flex: 1, paddingRight: "20px" }}>
-        <button style={{ marginBottom: "10px" }}>+ Tambah User</button>
-        <table>
-          <thead>
-            <tr>
-              <th>Nomor</th>
-              <th>Username</th>
-              <th>Password</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.nomor}>
-                <td>{user.nomor}</td>
-                <td>{user.username}</td>
-                <td>{user.password}</td>
+        {/* Kontainer utama untuk tabel dan form */}
+        <div style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
+          {/* Tabel User */}
+          <table>
+            <thead>
+              <tr>
+                <th>Nomor</th>
+                <th>Username</th>
+                <th>Password</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div style={{ flex: 1 }}>
-      <div className="form-container">
-      <form>
-        <div className="form-row">
-          <div className="form-group">
-            <label>Username*</label>
-            <input type="text" placeholder="Masukkan Username" />
-          </div>
-          <div className="form-group">
-            <label>Nama lengkap</label>
-            <input type="text" placeholder="Masukkan Nama Lengkap" />
-          </div>
-        </div>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.nomor}>
+                  <td>{user.nomor}</td>
+                  <td>{user.username}</td>
+                  <td>{user.password}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-        <div className="form-row">
-          <div className="form-group">
-            <label>Password*</label>
-            <input type="password" placeholder="Masukkan Password" />
-          </div>
-          <div className="form-row">
-            <div className="form-group">
-             <label>No. Telp*</label>
-             <input type="tel" placeholder="Masukkan No. Telepon" />
+          {/* Render form secara kondisional di samping tabel */}
+          {isFormVisible && (
+            <div style={{ flex: 1, marginTop: "-50px" }}>
+              {" "}
+              {/* Menambahkan marginTop negatif untuk menaikkan form */}
+              <div className="form-container">
+                <form>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Username*</label>
+                      <input type="text" placeholder="Masukkan Username" />
+                    </div>
+                    <div className="form-group">
+                      <label>Nama lengkap</label>
+                      <input type="text" placeholder="Masukkan Nama Lengkap" />
+                    </div>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Password*</label>
+                      <input type="password" placeholder="Masukkan Password" />
+                    </div>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>No. Telp*</label>
+                        <input type="tel" placeholder="Masukkan No. Telepon" />
+                      </div>
+                      <div className="form-group">
+                        <label>Tanggal Lahir*</label>
+                        <input type="date" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Email</label>
+                      <input type="email" placeholder="Masukkan Email" />
+                    </div>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Jenis Kelamin</label>
+                        <div className="radio-group">
+                          <input type="radio" name="gender" value="Laki-laki" />{" "}
+                          Laki-laki
+                          <input
+                            type="radio"
+                            name="gender"
+                            value="Perempuan"
+                          />{" "}
+                          Perempuan
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label>Role</label>
+                        <select>
+                          <option>Pilih Role</option>
+                          <option>Dokter</option>
+                          <option>Teller</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="button-group">
+                    <button
+                      type="button"
+                      className="cancel-button"
+                      onClick={() => setFormVisible(false)}
+                    >
+                      Batal
+                    </button>
+                    <button type="submit" className="save-button">
+                      Simpan
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <div className="form-group">
-            <label>Tanggal Lahir*</label>
-            <input type="date" />
-            </div>
+          )}
         </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="Masukkan Email" />
-          </div>
-          <div className="form-row">
-          <div className="form-group">
-            <label>Jenis Kelamin</label>
-            <div className="radio-group">
-              <input type="radio" name="gender" value="Laki-laki" /> Laki-laki
-              <input type="radio" name="gender" value="Perempuan" /> Perempuan
-            </div>
-          </div>
-          <div className="form-group">
-            <label>Role</label>
-            <select>
-              <option>Pilih Role</option>
-              <option>Dokter</option>
-              <option>Teller</option>
-              {/* Additional options can be added here */}
-            </select>
-          </div>
-        </div> 
-        </div>
-
-
-        <div className="button-group">
-          <button type="button" className="cancel-button">Batal</button>
-          <button type="submit" className="save-button">Simpan</button>
-        </div>
-      </form>
-    </div>
       </div>
-    </div>
-      </div>
-    </div>
-    </div>
+    </MainLayout>
   );
 };
 
