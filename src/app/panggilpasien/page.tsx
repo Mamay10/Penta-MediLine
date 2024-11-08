@@ -3,16 +3,21 @@ import 'tailwindcss/tailwind.css';
 
 const App = () => {
   return (
-    <div className="p-6 bg-gray-200 min-h-screen">
+    <div className="p-6 bg-gray-200 min-h-screen max-w-screen-2xl mx-auto">
       {/* Header Section */}
       <div className="header flex justify-between items-center p-4 bg-teal-900 rounded-lg shadow-lg mb-6">
-        <h1 className="text-white text-xl font-semibold">
-          <i className="fas fa-arrow-left mr-2"></i> PANGGIL ANTRIAN
-        </h1>
+        {/* Logo */}
+        <div className="flex items-center">
+          <img src="https://placehold.co/50x50" alt="Logo" className="w-12 h-12 rounded-full mr-4" />
+          <h1 className="text-white text-xl font-semibold">
+            PANGGIL ANTRIAN
+          </h1>
+        </div>
+        {/* User Info */}
         <div className="user-info flex items-center text-white">
           <span className="mr-2">Halo Dewi</span>
-          <i className="fas fa-user-circle text-xl"></i>
-          <i className="fas fa-sign-out-alt text-xl ml-4"></i>
+          <i className="fas fa-user-circle text-2xl mr-4"></i>
+          <i className="fas fa-sign-out-alt text-2xl"></i>
         </div>
       </div>
 
