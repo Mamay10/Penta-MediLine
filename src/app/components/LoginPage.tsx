@@ -1,28 +1,41 @@
 "use client"; // Tambahkan ini di baris pertama
 
-import { useRouter } from 'next/navigation'; // Ganti next/router dengan next/navigation
+// LoginPage.tsx
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import "../styles/Login.css"; // Buat file CSS untuk styling
+import "../styles/Login.css";
 import Layout from "./Layout";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter(); // Menggunakan next/navigation
+  const router = useRouter();
 
-  const handleLogin = (event: React.FormEvent) => {
+  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (username === "admin" && password === "admin") {
-      router.push("/dashboard"); // Redirect ke dashboard
+
+    const response = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      if (data.role === "admin") {
+        router.push("/dashboard");
+      } else {
+        alert("Login berhasil, tetapi Anda bukan admin");
+        router.push("/user-dashboard");
+      }
     } else {
-      alert("Login gagal");
+      alert(data.message);
     }
   };
 
   return (
-    <Layout  imageSrc="/assets/icon login.png"  
-    secondImageClassName="extra-login-image"  // ClassName khusus untuk gambar tambahan di Login
->
+    <Layout imageSrc="/assets/icon login.png" secondImageClassName="extra-login-image">
       <div className="login-card">
         <h2>Silahkan Masuk</h2>
         <form onSubmit={handleLogin}>
@@ -46,17 +59,12 @@ const LoginPage: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="forgot-password">
-            <a href="/forgot-password">Lupa Kata Sandi?</a>
-          </div>
-          <button type="submit" className="login-button">
-            Masuk
-          </button>
+          <button type="submit" className="login-button">Masuk</button>
         </form>
-        {/* Menambahkan gambar dekoratif */}
       </div>
     </Layout>
   );
 };
 
 export default LoginPage;
+

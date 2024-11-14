@@ -1,12 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'; // Gunakan useRouter dari Next.js
 import "../styles/Page.css";
 import Layout from "../components/Layout";
 
 const Dashboard: React.FC = () => {
   const router = useRouter(); // Inisialisasi useRouter
+  const [role, setRole] = useState("");
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const { role } = jwt_decode(token); // Gunakan jwt_decode untuk mengurai token
+      setRole(role);
+    }
+  }, []);
   const handleRegistrasiClick = () => {
     router.push("/regist"); // Arahkan ke halaman registrasi
   };
@@ -35,10 +43,15 @@ const Dashboard: React.FC = () => {
         </button>
         <button className="dashboard-button" onClick={handleAntrianClick}>Panggil Pasien</button>
         <button className="dashboard-button" onClick={handleRekapClick}>Rekap</button>
-        <button className="dashboard-button" onClick={handleSettingClick}>Pengaturan</button>
-      </div>
+        {role === "admin" && (
+          <button className="dashboard-button" onClick={handleSettingClick}>Pengaturan</button>
+        )}      </div>
     </Layout>
   );
 };
 
 export default Dashboard;
+function jwt_decode(token: string): { role: any; } {
+  throw new Error("Function not implemented.");
+}
+

@@ -127,7 +127,7 @@
     color: #214b56;
   }
   
-  .button-group {
+  .button-container {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -160,4 +160,33 @@
     background-color: #3aa9ad;
   }
   
+  .hapus-button {
+    background-color: #c84b4b;
+    color: #ffffff;
+  }
+  
+  .hapus-button:hover {
+    background-color: #c21e1e;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .modal button {
+    margin: 0 5px;
+  }
   
