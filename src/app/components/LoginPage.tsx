@@ -24,6 +24,7 @@ const LoginPage: React.FC = () => {
   }, []);
 
   const handleLogin = async (event: React.FormEvent) => {
+  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       const response = await fetch('/api/auth/login', {
@@ -61,6 +62,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
+    <Layout imageSrc="/assets/icon login.png" secondImageClassName="extra-login-image">
     <Layout imageSrc="/assets/icon login.png" secondImageClassName="extra-login-image">
       <div className="login-card">
         <h2>Silahkan Masuk</h2>
@@ -109,3 +111,4 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
+
