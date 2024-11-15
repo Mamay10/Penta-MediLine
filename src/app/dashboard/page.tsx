@@ -43,9 +43,9 @@ const Dashboard: React.FC = () => {
         </button>
         <button className="dashboard-button" onClick={handleAntrianClick}>Panggil Pasien</button>
         <button className="dashboard-button" onClick={handleRekapClick}>Rekap</button>
-        {role === "admin" && (
+       
           <button className="dashboard-button" onClick={handleSettingClick}>Pengaturan</button>
-        )}      </div>
+        </div>
     </Layout>
   );
 };

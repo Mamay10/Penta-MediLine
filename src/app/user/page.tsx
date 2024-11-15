@@ -15,14 +15,10 @@ interface User {
 }
 
 const UserPage: React.FC = () => {
-  // Hapus data statis di sini
   const [users, setUsers] = useState<User[]>([]);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null); // User yang dipilih
-
-  // State untuk mengontrol visibilitas form
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isFormVisible, setFormVisible] = useState(false);
 
-  // State untuk menyimpan data input dari form
   const [newUser, setNewUser] = useState({
     username: "",
     password: "",
@@ -34,19 +30,18 @@ const UserPage: React.FC = () => {
     role: "",
   });
 
-  // Mengambil data user dari API ketika halaman dimuat
   useEffect(() => {
     fetch("/api/users", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         console.log("Data dari API:", data);
-        setUsers(data); // Perbarui state `users` dengan data dari API
+        setUsers(data);
       })
       .catch((error) => console.error("Error:", error));
   }, []);
 
   const handleAddUserClick = () => {
-    setSelectedUser(null); // Reset pilihan user
+    setSelectedUser(null);
     setNewUser({
       username: "",
       password: "",
@@ -57,12 +52,11 @@ const UserPage: React.FC = () => {
       jenis_kelamin: "",
       role: "",
     });
-    setFormVisible(true); // Tampilkan form
+    setFormVisible(true);
   };
 
-  // Fungsi untuk memilih user dari tabel
   const handleRowClick = (user: User) => {
-    setSelectedUser(user); // Set user yang dipilih
+    setSelectedUser(user);
     setNewUser({
       username: user.username,
       password: user.password,
@@ -73,10 +67,9 @@ const UserPage: React.FC = () => {
       jenis_kelamin: user.jenis_kelamin || "",
       role: user.role || "",
     });
-    setFormVisible(true); // Tampilkan form
+    setFormVisible(true);
   };
 
-  // Fungsi untuk menambah user baru ke database melalui API
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -89,9 +82,8 @@ const UserPage: React.FC = () => {
       });
       const savedUser = await response.json();
       console.log("savedUser:", savedUser);
-      setUsers([...users, savedUser]); // Tambahkan data baru ke `users`
+      setUsers([...users, savedUser]);
       setFormVisible(false);
-      // Reset form setelah berhasil menambah user
       setNewUser({
         username: "",
         password: "",
@@ -107,7 +99,6 @@ const UserPage: React.FC = () => {
     }
   };
 
-  // Fungsi untuk menghapus user
   const handleDelete = async () => {
     if (selectedUser) {
       try {
@@ -121,24 +112,20 @@ const UserPage: React.FC = () => {
     }
   };
 
-  // Fungsi untuk membatalkan perubahan
   const handleCancelChanges = () => {
-    setSelectedUser(null); // Batalkan user yang dipilih
-    setFormVisible(false); // Sembunyikan form
-   
+    setSelectedUser(null);
+    setFormVisible(false);
   };
-  // Toggle visibilitas form
+
   const toggleForm = () => {
     setFormVisible(!isFormVisible);
   };
 
   return (
     <MainLayout>
-      {/* Kontainer untuk tombol dan kontainer utama */}
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {/* Tombol Tambah User */}
         <button
-          onClick={toggleForm}
+          onClick={handleAddUserClick}
           style={{
             marginBottom: "15px",
             alignSelf: "flex-start",
@@ -148,9 +135,7 @@ const UserPage: React.FC = () => {
           &#43; Tambah User
         </button>
 
-        {/* Kontainer utama untuk tabel dan form */}
         <div style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
-          {/* Tabel User */}
           <table>
             <thead>
               <tr>
@@ -161,7 +146,7 @@ const UserPage: React.FC = () => {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user.nomor}>
+                <tr key={user.nomor} onClick={() => handleRowClick(user)}>
                   <td>{user.nomor}</td>
                   <td>{user.username}</td>
                   <td>{user.password}</td>
@@ -170,7 +155,6 @@ const UserPage: React.FC = () => {
             </tbody>
           </table>
 
-          {/* Render form secara kondisional di samping tabel */}
           {isFormVisible && (
             <div style={{ flex: 1, marginTop: "-50px" }}>
               <div className="form-container">
@@ -305,7 +289,7 @@ const UserPage: React.FC = () => {
 
                   <div className="button-container">
                     <button type="submit" className="save-button">
-                      Simpan{" "}
+                      Simpan
                     </button>
                     <button
                       type="button"
