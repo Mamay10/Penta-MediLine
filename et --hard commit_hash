@@ -1,0 +1,55 @@
+[33mb5c73b1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmamay[m[33m)[m HEAD@{0}: reset: moving to HEAD^
+[33m2980e44[m[33m ([m[1;31morigin/mamay[m[33m)[m HEAD@{1}: commit: login
+[33mb5c73b1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmamay[m[33m)[m HEAD@{2}: pull origin main: Fast-forward
+[33m6711170[m HEAD@{3}: reset: moving to HEAD
+[33m6711170[m HEAD@{4}: reset: moving to HEAD
+[33m6711170[m HEAD@{5}: pull origin main: Fast-forward
+[33mf5a23a8[m[33m ([m[1;32mmain[m[33m)[m HEAD@{6}: reset: moving to HEAD
+[33mf5a23a8[m[33m ([m[1;32mmain[m[33m)[m HEAD@{7}: pull origin main: Fast-forward
+[33m73b6ec6[m HEAD@{8}: checkout: moving from main to mamay
+[33mf5a23a8[m[33m ([m[1;32mmain[m[33m)[m HEAD@{9}: commit: lanjut
+[33m23730d8[m HEAD@{10}: checkout: moving from mamay to main
+[33m73b6ec6[m HEAD@{11}: checkout: moving from main to mamay
+[33m23730d8[m HEAD@{12}: pull origin main: Fast-forward
+[33m73b6ec6[m HEAD@{13}: checkout: moving from mamay to main
+[33m73b6ec6[m HEAD@{14}: checkout: moving from main to mamay
+[33m73b6ec6[m HEAD@{15}: checkout: moving from mamay to main
+[33m73b6ec6[m HEAD@{16}: pull origin main: Fast-forward
+[33m76341df[m HEAD@{17}: checkout: moving from main to mamay
+[33m73b6ec6[m HEAD@{18}: commit: ...
+[33m76341df[m HEAD@{19}: merge mamay: Fast-forward
+[33m7f99783[m HEAD@{20}: checkout: moving from mamay to main
+[33m76341df[m HEAD@{21}: commit: next setting
+[33m7f99783[m HEAD@{22}: checkout: moving from main to mamay
+[33m7f99783[m HEAD@{23}: merge mamay: Fast-forward
+[33mbd07b5f[m HEAD@{24}: checkout: moving from mamay to main
+[33m7f99783[m HEAD@{25}: commit: setting all
+[33mbd07b5f[m HEAD@{26}: checkout: moving from main to mamay
+[33mbd07b5f[m HEAD@{27}: merge mamay: Fast-forward
+[33m3f3de12[m HEAD@{28}: checkout: moving from mamay to main
+[33mbd07b5f[m HEAD@{29}: commit: form user
+[33m53c19c4[m HEAD@{30}: commit: vidio display
+[33m3f3de12[m HEAD@{31}: pull origin main: Fast-forward
+[33m44bc081[m HEAD@{32}: checkout: moving from main to mamay
+[33m3f3de12[m HEAD@{33}: commit: rekap, display, setting
+[33m44bc081[m HEAD@{34}: merge mamay: Fast-forward
+[33mc792d5c[m HEAD@{35}: checkout: moving from mamay to main
+[33m44bc081[m HEAD@{36}: commit: display & setting
+[33mc792d5c[m HEAD@{37}: pull origin main: Fast-forward
+[33me257c67[m HEAD@{38}: checkout: moving from main to mamay
+[33mc792d5c[m HEAD@{39}: commit: set new
+[33me257c67[m HEAD@{40}: merge mamay: Fast-forward
+[33md1889ac[m HEAD@{41}: checkout: moving from mamay to main
+[33me257c67[m HEAD@{42}: checkout: moving from main to mamay
+[33md1889ac[m HEAD@{43}: checkout: moving from mamay to main
+[33me257c67[m HEAD@{44}: commit: setting
+[33md1889ac[m HEAD@{45}: pull origin main: Fast-forward
+[33m37d2015[m HEAD@{46}: checkout: moving from main to mamay
+[33md1889ac[m HEAD@{47}: commit: set
+[33m058622a[m HEAD@{48}: commit: bpjs
+[33m37d2015[m HEAD@{49}: merge mamay: Fast-forward
+[33m4096ce5[m HEAD@{50}: checkout: moving from mamay to main
+[33m37d2015[m HEAD@{51}: commit: regist
+[33m4096ce5[m HEAD@{52}: checkout: moving from main to mamay
+[33m4096ce5[m HEAD@{53}: commit: style
+[33m2bcf4db[m HEAD@{54}: clone: from https://github.com/Mamay10/Penta-MediLine.git
