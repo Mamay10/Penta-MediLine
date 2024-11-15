@@ -1,28 +1,67 @@
-"use client"; // Tambahkan ini di baris pertama
-
-import { useRouter } from 'next/navigation'; // Ganti next/router dengan next/navigation
-import { useState } from 'react';
-import "../styles/Login.css"; // Buat file CSS untuk styling
+"use client";
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import "../styles/Login.css";
 import Layout from "./Layout";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter(); // Menggunakan next/navigation
+  const [rememberMe, setRememberMe] = useState(false); // State untuk opsi Remember Me
+  const router = useRouter();
 
-  const handleLogin = (event: React.FormEvent) => {
+  useEffect(() => {
+    // Cek apakah ada data tersimpan di localStorage saat komponen pertama kali di-render
+    const savedUsername = localStorage.getItem("savedUsername");
+    const savedPassword = localStorage.getItem("savedPassword");
+
+    // Jika ada data tersimpan, isi input dengan data tersebut
+    if (savedUsername && savedPassword) {
+      setUsername(savedUsername);
+      setPassword(savedPassword);
+      setRememberMe(true);
+    }
+  }, []);
+
+  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (username === "admin" && password === "admin") {
-      router.push("/dashboard"); // Redirect ke dashboard
-    } else {
-      alert("Login gagal");
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message);
+        localStorage.setItem('token', data.token); // Simpan token di localStorage
+
+        // Jika Remember Me dicentang, simpan username dan password di localStorage
+        if (rememberMe) {
+          localStorage.setItem("savedUsername", username);
+          localStorage.setItem("savedPassword", password);
+        } else {
+          // Jika Remember Me tidak dicentang, hapus data username dan password yang tersimpan
+          localStorage.removeItem("savedUsername");
+          localStorage.removeItem("savedPassword");
+        }
+
+        router.push("/dashboard");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.message);
+      }
+    } catch (error) {
+      console.error("Terjadi kesalahan:", error);
+      alert("Terjadi kesalahan saat login");
     }
   };
 
   return (
-    <Layout  imageSrc="/assets/icon login.png"  
-    secondImageClassName="extra-login-image"  // ClassName khusus untuk gambar tambahan di Login
->
+    <Layout imageSrc="/assets/icon login.png" secondImageClassName="extra-login-image">
       <div className="login-card">
         <h2>Silahkan Masuk</h2>
         <form onSubmit={handleLogin}>
@@ -46,14 +85,24 @@ const LoginPage: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          <div className="remember-me-main">
+          <div className="remember-me">
+            <input
+              type="checkbox"
+              id="rememberMe"
+              checked={rememberMe}
+              onChange={() => setRememberMe(!rememberMe)}
+            />
+            <label htmlFor="rememberMe">Ingat saya</label>
+          </div>
           <div className="forgot-password">
             <a href="/forgot-password">Lupa Kata Sandi?</a>
+          </div>
           </div>
           <button type="submit" className="login-button">
             Masuk
           </button>
         </form>
-        {/* Menambahkan gambar dekoratif */}
       </div>
     </Layout>
   );
