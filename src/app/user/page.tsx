@@ -137,7 +137,7 @@ const UserPage: React.FC = () => {
 
         <div style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
           <table>
-            <thead>
+            <thead> 
               <tr>
                 <th>Nomor</th>
                 <th>Username</th>
