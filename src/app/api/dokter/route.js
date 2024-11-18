@@ -1,7 +1,7 @@
 // pages/api/dokter/index.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import pool from './api/db';
-import authenticate from '. /middleware/auth';
+import pool from '../db';
+import authenticate from '../auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {

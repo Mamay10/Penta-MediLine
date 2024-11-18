@@ -24,7 +24,6 @@ const LoginPage: React.FC = () => {
   }, []);
 
   const handleLogin = async (event: React.FormEvent) => {
-  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       const response = await fetch('/api/auth/login', {
@@ -63,7 +62,6 @@ const LoginPage: React.FC = () => {
 
   return (
     <Layout imageSrc="/assets/icon login.png" secondImageClassName="extra-login-image">
-    <Layout imageSrc="/assets/icon login.png" secondImageClassName="extra-login-image">
       <div className="login-card">
         <h2>Silahkan Masuk</h2>
         <form onSubmit={handleLogin}>
@@ -87,7 +85,6 @@ const LoginPage: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="remember-me-main">
           <div className="remember-me">
             <input
               type="checkbox"
@@ -100,7 +97,6 @@ const LoginPage: React.FC = () => {
           <div className="forgot-password">
             <a href="/forgot-password">Lupa Kata Sandi?</a>
           </div>
-          </div>
           <button type="submit" className="login-button">
             Masuk
           </button>
@@ -111,4 +107,3 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
-

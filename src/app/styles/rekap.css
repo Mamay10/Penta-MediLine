@@ -116,6 +116,10 @@
     flex-direction: column;
     margin-left: 50px;
   }
+
+  .input-group label {
+    color: white;
+  }
   
   /* Download button */
   .download-button {
