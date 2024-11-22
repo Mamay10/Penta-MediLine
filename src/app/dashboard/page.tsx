@@ -46,24 +46,13 @@ const Dashboard: React.FC = () => {
         <button className="dashboard-button" onClick={handleRegistrasiClick}>
           Registrasi
         </button>
-<<<<<<< HEAD
+
         <button className="dashboard-button" onClick={handleAntrianClick}>Panggil Pasien</button>
         <button className="dashboard-button" onClick={handleRekapClick}>Rekap</button>
-       
-          <button className="dashboard-button" onClick={handleSettingClick}>Pengaturan</button>
-        </div>
-=======
-        <button className="dashboard-button" onClick={handleAntrianClick}>
-          Panggil Pasien
-        </button>
-        <button className="dashboard-button" onClick={handleRekapClick}>
-          Rekap
-        </button>
-        <button className="dashboard-button" onClick={handleSettingClick}>
-          Pengaturan
-        </button>
+      
+        <button className="dashboard-button" onClick={handleSettingClick}>Pengaturan</button>
       </div>
->>>>>>> a7092f204b8bcad982a853a1de886a74f52b3e03
+
     </Layout>
   );
 };

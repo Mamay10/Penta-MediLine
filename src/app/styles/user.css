@@ -189,4 +189,23 @@
   .modal button {
     margin: 0 5px;
   }
+
+  input[type="password"] {
+    padding-right: 40px; /* Memberikan ruang untuk ikon */
+  }
+  
+  .form-group div {
+    position: relative;
+  }
+  
+  .form-group div svg {
+    fill: rgba(128, 128, 128, 0.7); /* Warna abu-abu transparan */
+    cursor: pointer;
+  }
+  .password-dots {
+    color: gray; /* Warna abu-abu */
+    font-size: 12px; /* Ukuran kecil-sedang */
+    font-family: Arial, sans-serif; /* Tambahan opsional untuk memastikan tampilan */
+  }
+  
   

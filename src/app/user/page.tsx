@@ -1,3 +1,4 @@
+//tampilan 
 "use client";
 import React, { useState, useEffect } from "react";
 import MainLayout from "../setting/MainLayout";
@@ -18,6 +19,7 @@ const UserPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isFormVisible, setFormVisible] = useState(false);
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
 
   const [newUser, setNewUser] = useState({
     username: "",
@@ -41,20 +43,45 @@ const UserPage: React.FC = () => {
   }, []);
 
   const handleAddUserClick = () => {
-    setSelectedUser(null);
-    setNewUser({
-      username: "",
-      password: "",
-      nama_lengkap: "",
-      no_telp: "",
-      tanggal_lahir: "",
-      email: "",
-      jenis_kelamin: "",
-      role: "",
-    });
-    setFormVisible(true);
+    if (isFormVisible && !selectedUser) {
+      // Jika form sedang terbuka untuk tambah user, reset dan tutup form
+      setFormVisible(false);
+      setNewUser({
+        username: "",
+        password: "",
+        nama_lengkap: "",
+        no_telp: "",
+        tanggal_lahir: "",
+        email: "",
+        jenis_kelamin: "",
+        role: "",
+      });
+    } else {
+      // Jika form tertutup, tampilkan untuk tambah user
+      setSelectedUser(null);
+      setFormVisible(true);
+      setNewUser({
+        username: "",
+        password: "",
+        nama_lengkap: "",
+        no_telp: "",
+        tanggal_lahir: "",
+        email: "",
+        jenis_kelamin: "",
+        role: "",
+      });
+    }
   };
 
+  const formatDate = (dateString: string | undefined) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+  
   const handleRowClick = (user: User) => {
     setSelectedUser(user);
     setNewUser({
@@ -62,7 +89,7 @@ const UserPage: React.FC = () => {
       password: user.password,
       nama_lengkap: user.nama_lengkap || "",
       no_telp: user.no_telp || "",
-      tanggal_lahir: user.tanggal_lahir || "",
+      tanggal_lahir: formatDate(user.tanggal_lahir), // Format tanggal lahir
       email: user.email || "",
       jenis_kelamin: user.jenis_kelamin || "",
       role: user.role || "",
@@ -112,14 +139,34 @@ const UserPage: React.FC = () => {
     }
   };
 
-  const handleCancelChanges = () => {
-    setSelectedUser(null);
+  const handleCancelClick = () => {
+    // Hanya untuk form tambah user
     setFormVisible(false);
+    setNewUser({
+      username: "",
+      password: "",
+      nama_lengkap: "",
+      no_telp: "",
+      tanggal_lahir: "",
+      email: "",
+      jenis_kelamin: "",
+      role: "",
+    });
   };
+  
+  const handleExitClick = () => {
+    // Hanya untuk form data lengkap user
+    setFormVisible(false);
+    setSelectedUser(null);
+  };
+
+  
 
   const toggleForm = () => {
     setFormVisible(!isFormVisible);
   };
+
+
 
   return (
     <MainLayout>
@@ -137,7 +184,7 @@ const UserPage: React.FC = () => {
 
         <div style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
           <table>
-            <thead> 
+            <thead>
               <tr>
                 <th>Nomor</th>
                 <th>Username</th>
@@ -190,15 +237,61 @@ const UserPage: React.FC = () => {
                   <div className="form-row">
                     <div className="form-group">
                       <label>Password*</label>
-                      <input
-                        type="password"
-                        placeholder="Masukkan Password"
-                        value={newUser.password}
-                        onChange={(e) =>
-                          setNewUser({ ...newUser, password: e.target.value })
-                        }
-                      />
+                      <div style={{ position: "relative", width: "100%" }}>
+                        <input
+                          type={isPasswordVisible ? "text" : "password"}
+                          placeholder="Masukkan Password"
+                          value={newUser.password}
+                          onChange={(e) =>
+                            setNewUser({ ...newUser, password: e.target.value })
+                          }
+                        />
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "145px",
+
+                            transform: "translateY(-50%)",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => setPasswordVisible(!isPasswordVisible)}
+                        >
+                          {isPasswordVisible ? (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="gray"
+                              strokeWidth={2}
+                              style={{ width: "20px", height: "20px" }}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3.98 8.606C4.64 8.253 6.91 6 12 6c5.09 0 7.36 2.253 8.02 2.606m-16.04 0C5.88 7.86 7.55 7 12 7c4.45 0 6.12.86 7.02 1.606M3.98 8.606C5.88 9.342 7.55 10 12 10c4.45 0 6.12-.658 8.02-1.394m-16.04 0C3.02 9.618 2 10.5 2 12s1.02 2.382 1.98 2.606m0-3.212c0 1.212 1.39 2.182 2.42 2.98m0-3.192c0-1.212 1.39-2.182 2.42-2.98"
+                              />
+                            </svg>
+                          ) : (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="white"
+                              strokeWidth={2}
+                              style={{ width: "20px", height: "20px" }}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 4.5C7.5 4.5 4.5 6 2 12c2.5 6 5.5 7.5 10 7.5s7.5-1.5 10-7.5c-2.5-6-5.5-7.5-10-7.5z"
+                              />
+                            </svg>
+                          )}
+                        </div>
+                      </div>
                     </div>
+
                     <div className="form-row">
                       <div className="form-group">
                         <label>No. Telp*</label>
@@ -288,15 +381,27 @@ const UserPage: React.FC = () => {
                   </div>
 
                   <div className="button-container">
+                    {!selectedUser ? (
+                      // Tombol Batal hanya untuk tambah user
+                      <button
+                        type="button"
+                        className="cancel-button"
+                        onClick={handleCancelClick}
+                      >
+                        Batal
+                      </button>
+                    ) : (
+                      // Tombol Keluar hanya untuk data lengkap user
+                      <button
+                        type="button"
+                        className="cancel-button"
+                        onClick={handleExitClick}
+                      >
+                        Keluar
+                      </button>
+                    )}
                     <button type="submit" className="save-button">
                       Simpan
-                    </button>
-                    <button
-                      type="button"
-                      className="cancel-button"
-                      onClick={handleCancelChanges}
-                    >
-                      Batal
                     </button>
                     {selectedUser && (
                       <button

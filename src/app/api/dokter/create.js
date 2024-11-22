@@ -3,12 +3,12 @@ import pool from '../db';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { kode, password, nama_lengkap, no_telp, tanggal_lahir, email, jenis_kelamin, role } = req.body;
+    const { kode, nama_lengkap } = req.body;
     try {
       const result = await pool.query(
-        `INSERT INTO users (username, password, nama_lengkap, no_telp, tanggal_lahir, email, jenis_kelamin, role) 
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-        [username, password, nama_lengkap, no_telp, tanggal_lahir, email, jenis_kelamin, role]
+        `INSERT INTO users (kode, nama_lengkap) 
+        VALUES ($1, $2) RETURNING *`,
+        [kode, nama_lengkap]
       );
       res.status(200).json(result.rows[0]);
     } catch (error) {
