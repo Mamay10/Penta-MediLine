@@ -65,13 +65,36 @@ h2 {
 .forgot-password {
   text-align: right;
   width: 100%; /* Memastikan link menyesuaikan lebar card */
-  margin-bottom: 16px;
 }
 
 .forgot-password a {
   color: #fcfbfb;
-  font-size: 15px;
   font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
+
+.remember-me-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Pastikan kontainer mencakup seluruh lebar */
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap; /* Pastikan teks tidak terputus */
+}
+
+.remember-me label{
+  font-size: 15px;
 }
 
 .login-button {
@@ -110,3 +133,6 @@ h2 {
   justify-content: center; /* Mengatur agar konten berada di tengah secara vertikal */
   align-items: center; /* Mengatur agar konten berada di tengah secara horizontal */
 }
+
+
+

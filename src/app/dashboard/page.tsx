@@ -1,42 +1,58 @@
 "use client";
-import React from "react";
-import { useRouter } from 'next/navigation'; // Gunakan useRouter dari Next.js
+import React, { useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import "../styles/Page.css";
 import Layout from "../components/Layout";
 
 const Dashboard: React.FC = () => {
-  const router = useRouter(); // Inisialisasi useRouter
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // Cek token di localStorage
+
+    // Jika token tidak ada, redirect ke halaman login
+    if (!token) {
+      router.push('/'); // Arahkan ke halaman login dengan path '/'
+    }
+  }, [router]);
 
   const handleRegistrasiClick = () => {
-    router.push("/regist"); // Arahkan ke halaman registrasi
+    router.push("/regist");
   };
 
   const handleSettingClick = () => {
-    router.push("/setting"); // Arahkan ke halaman registrasi
+    router.push("/setting");
   };
+
   const handleAntrianClick = () => {
-    router.push("/antrian"); // Arahkan ke halaman registrasi
+    router.push("/antrian");
   };
+
   const handleRekapClick = () => {
-    router.push("/rekap"); // Arahkan ke halaman registrasi
+    router.push("/rekap");
+  };
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem('token'); // Hapus token dari localStorage
+    router.push('/'); // Redirect ke halaman login
   };
 
   return (
     <Layout
-      imageSrc="/assets/doctor.png" // Gambar utama untuk Dashboard
-      secondImageClassName="extra-dashboard-image" // ClassName khusus untuk gambar tambahan di Dashboard
+      imageSrc="/assets/doctor.png"
+      secondImageClassName="extra-dashboard-image"
     >
-      {/* Right section: Menu buttons */}
       <div className="button-group">
-        {" "}
-        {/* Menggunakan class button-group */}
         <button className="dashboard-button" onClick={handleRegistrasiClick}>
           Registrasi
         </button>
+
         <button className="dashboard-button" onClick={handleAntrianClick}>Panggil Pasien</button>
         <button className="dashboard-button" onClick={handleRekapClick}>Rekap</button>
+      
         <button className="dashboard-button" onClick={handleSettingClick}>Pengaturan</button>
       </div>
+
     </Layout>
   );
 };
