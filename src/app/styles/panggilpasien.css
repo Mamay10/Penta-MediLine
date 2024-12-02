@@ -43,7 +43,7 @@
 }
 
 .vector {
-    width: 15px;
+    width: 10px;
     height: auto;
 }
 
@@ -88,7 +88,7 @@
 
 .contentContainer {
     flex: 1;
-    background-color: #1D4A50;
+    background-color: #c9dbdd;
     display: flex;
     flex-direction: column;
     padding: 20px;

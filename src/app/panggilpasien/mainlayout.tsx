@@ -1,7 +1,7 @@
 import React from "react";
 import LogoSection from "./logosection";
 import HeaderSection from "./header";
-import ButtonSection from "./button";
+import ContentSection from "./content";
 import "../styles/panggilpasien.css"; // untuk memastikan file CSS sudah diatur dengan benar
 
 interface MainLayoutProps {
@@ -19,7 +19,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
     {/* Main Content Section */}
     <div className="flex-col">
       {/* Button Section */}
-      <ButtonSection />
+      <ContentSection />
       
       {/* Content Section */}
       <div className="contentContainer flex-grow bg-gray-100 p-6 overflow-y-auto">
