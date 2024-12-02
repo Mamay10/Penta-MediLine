@@ -37,8 +37,9 @@ const SettingsPage: React.FC = () => {
                   <label htmlFor="filter-select">Filter</label>
                   <select id="filter-select" name="filter-select">
                     <option value="">Pilih Filter</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
+                    <option value="1">Dokter</option>
+                    <option value="2">Klinik</option>
+                    <option value="2">Teller </option>
                   </select>
                 </div>
               </div>

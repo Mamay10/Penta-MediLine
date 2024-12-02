@@ -18,7 +18,6 @@ const UserPage: React.FC = () => {
   // Hapus data statis di sini
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null); // User yang dipilih
-
   // State untuk mengontrol visibilitas form
   const [isFormVisible, setFormVisible] = useState(false);
 
@@ -40,7 +39,7 @@ const UserPage: React.FC = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("Data dari API:", data);
-        setUsers(data); // Perbarui state `users` dengan data dari API
+        setUsers(data); // Perbarui state users dengan data dari API
       })
       .catch((error) => console.error("Error:", error));
   }, []);
@@ -89,7 +88,7 @@ const UserPage: React.FC = () => {
       });
       const savedUser = await response.json();
       console.log("savedUser:", savedUser);
-      setUsers([...users, savedUser]); // Tambahkan data baru ke `users`
+      setUsers([...users, savedUser]); // Tambahkan data baru ke users
       setFormVisible(false);
       // Reset form setelah berhasil menambah user
       setNewUser({
@@ -111,7 +110,7 @@ const UserPage: React.FC = () => {
   const handleDelete = async () => {
     if (selectedUser) {
       try {
-        await fetch(`/api/users/${selectedUser.nomor}`, { method: "DELETE" });
+        await fetch('/api/users/${selectedUser.nomor}', { method: "DELETE" });
         setUsers(users.filter((user) => user.nomor !== selectedUser.nomor));
         setSelectedUser(null);
         setFormVisible(false);
