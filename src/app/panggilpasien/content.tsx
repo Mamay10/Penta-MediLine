@@ -1,13 +1,30 @@
-import React from "react";
+"use client"; // Menandakan bahwa ini adalah Client Component
+
+import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 
 const App = () => {
+  const [status, setStatus] = useState("Menunggu...");
+  const [isActive, setIsActive] = useState(false);
+
+  const handleButtonClick = (action: string) => {
+    if (action === "panggil") {
+      setStatus("Dipanggil!");
+    } else {
+      setStatus("Selesai!");
+    }
+  };
+
+  const toggleStatus = () => {
+    setIsActive(!isActive);
+  };
+
   return (
     <div className="h-screen bg-[#1D4A50] flex items-center justify-center p-6">
-      <div className="bg-[#1D4A50] w-full max-w-7xl rounded-lg shadow-2xl p-6 space-y-6">
-        <div className="flex flex-col lg:flex-row gap-6 overflow-hidden">
+      <div className="bg-[#1D4A50] w-full max-w-7xl rounded-lg shadow-xl p-6 space-y-6">
+        <div className="flex flex-col lg:flex-row gap-6 justify-center w-full">
           {/* Sidebar: Filter dan tabel */}
-          <div className="w-full lg:w-1/4 bg-white rounded-lg shadow-lg p-4 h-full">
+          <div className="w-full lg:w-1/4 bg-white rounded-lg shadow-md p-4 h-full">
             <div className="bg-[#D9D9D9] text-center text-black font-medium rounded-t-lg p-3 text-sm">
               Filter Berdasarkan
             </div>
@@ -21,7 +38,6 @@ const App = () => {
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
               </div>
             </div>
-            {/* Tabel Filter dengan Border */}
             <div className="mt-6 overflow-hidden border rounded-lg">
               <table className="w-full text-xs text-left bg-white text-black border-collapse">
                 <thead className="bg-[#D9D9D9] text-black">
@@ -35,16 +51,14 @@ const App = () => {
               <div className="max-h-48 overflow-y-auto">
                 <table className="w-full text-xs">
                   <tbody>
-                    {[
+                    {[ 
                       { id: "BA01", name: "MAMAY AYU LESTARI", date: "11/09 - 08:20", status: "dipanggil" },
                       { id: "A01", name: "KHOLIDIYAH AMNA", date: "11/09 - 08:40", status: "menunggu" },
                       { id: "A02", name: "SALSABILA SHAFIYA", date: "11/09 - 09:05", status: "menunggu" },
                     ].map((row, index) => (
                       <tr
                         key={row.id}
-                        className={`text-center ${
-                          index === 0 ? "bg-[#1D4A50] text-white" : "bg-yellow-500 text-black"
-                        }`}
+                        className={`text-center ${index === 0 ? "bg-[#1D4A50] text-white" : "bg-yellow-500 text-black"}`}
                       >
                         <td className="p-2 border border-gray-300">{row.id}</td>
                         <td className="p-2 border border-gray-300">{row.name}</td>
@@ -58,7 +72,7 @@ const App = () => {
           </div>
 
           {/* Nomor Antrian */}
-          <div className="w-full lg:w-1/3 bg-white rounded-lg shadow-lg p-6 h-full">
+          <div className="w-full lg:w-1/3 bg-white rounded-lg shadow-md p-6 h-full">
             <div className="bg-[#D9D9D9] text-center text-black font-medium rounded-t-lg p-3">
               NOMOR ANTRIAN
             </div>
@@ -69,34 +83,42 @@ const App = () => {
               <strong>Dr. Maulana Malik</strong>
             </div>
             <div className="flex justify-center space-x-4 mt-6">
-              <button className="bg-[#52B1BD] text-white font-medium py-2 px-6 rounded shadow-md hover:bg-[#459EA8]">
+              <button
+                className="bg-[#52B1BD] text-white font-medium py-2 px-6 rounded shadow-md hover:bg-[#459EA8]"
+                onClick={() => handleButtonClick("panggil")}
+              >
                 Panggil
               </button>
-              <button className="bg-[#52B1BD] text-white font-medium py-2 px-6 rounded shadow-md hover:bg-[#459EA8]">
+              <button
+                className="bg-[#52B1BD] text-white font-medium py-2 px-6 rounded shadow-md hover:bg-[#459EA8]"
+                onClick={() => handleButtonClick("selesai")}
+              >
                 Selesai
               </button>
+            </div>
+            <div className="mt-4 text-center text-xl text-black">
+              Status: {status}
             </div>
           </div>
 
           {/* Data Pasien */}
-          <div className="w-full lg:w-1/4 bg-white rounded-lg shadow-lg p-4 h-full">
-            <div className="text-black font-medium p-3 text-xs">
-              <span>DATA PASIEN</span>
-              {/* Box Hijau */}
-              <div className="bg-green-500 text-white py-2 px-4 rounded-md mt-2 text-center">
-                <span className="block font-bold text-sm">Poli Umum</span>
-                <span className="block text-xs">08:00 - 14:00</span>
-              </div>
+          <div className="w-full lg:w-1/4 bg-white rounded-lg shadow-md p-4 h-full">
+            <div className="bg-[#D9D9D9] text-center text-black font-medium rounded-t-lg p-3">
+              DATA PASIEN
             </div>
-            <div className="bg-[#1D4A50] text-white p-4 rounded-md mt-4">
-              {[
-                { label: "Jenis", value: "Pasien BPJS" },
+            <div className="flex justify-between items-center bg-[#1D4A50] text-white p-3 rounded-t-lg">
+              <span className="text-xs">POLI UMUM</span>
+              <span className="text-xs">08:00 - 14:00</span>
+            </div>
+            <div className="bg-[#1D4A50] text-white p-4 rounded-md mt-8">
+              {[ 
+                { label: "Jenis Pasien", value: "Pasien BPJS" },
                 { label: "Nama", value: "Mamay Ayu Lestari" },
                 { label: "Dokter", value: "Dr. Maulana Malik" },
                 { label: "Klinik", value: "Poli Umum" },
               ].map((field) => (
                 <div key={field.label} className="mt-4">
-                  <span className="block text-black font-medium text-xs">{field.label}:</span>
+                  <span className="block text-white font-medium text-xs">{field.label}:</span>
                   <input
                     type="text"
                     value={field.value}
