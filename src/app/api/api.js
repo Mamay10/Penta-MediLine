@@ -31,24 +31,22 @@ export const deleteUser = async (id) => {
 };
 
 //dokters
+// fetch semua dokter
 export const fetchDokters = async () => {
   const response = await fetch("http://localhost:5000/api/dokters");
   return response.json();
 };
 
-export const addDokter = async (userData) => {
+// tambah dokter baru
+export const addDokter = async (dokterData) => {
   await fetch("http://localhost:5000/api/dokters", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
+    body: JSON.stringify(dokterData),
   });
 };
 
-export const fetchDokterById = async (id) => {
-  const response = await fetch(`http://localhost:5000/api/dokters/${id}`);
-  return response.json();
-};
-
+// update dokter
 export const updateDokter = async (id, updatedData) => {
   await fetch(`http://localhost:5000/api/dokters/${id}`, {
     method: "PUT",
@@ -57,6 +55,38 @@ export const updateDokter = async (id, updatedData) => {
   });
 };
 
-export const deleteDokterr = async (id) => {
+// hapus dokter
+export const deleteDokter = async (id) => {
   await fetch(`http://localhost:5000/api/dokters/${id}`, { method: "DELETE" });
+};
+
+//poli
+
+// fetch semua poli
+export const fetchPolis = async () => {
+  const response = await fetch("http://localhost:5000/api/polis");
+  return response.json();
+};
+
+// tambah poli baru
+export const addPoli = async (poliData) => {
+  await fetch("http://localhost:5000/api/polis", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(poliData),
+  });
+};
+
+// update poli
+export const updatePoli = async (id, updatedData) => {
+  await fetch(`http://localhost:5000/api/polis/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updatedData),
+  });
+};
+
+// hapus poli
+export const deletePoli = async (id) => {
+  await fetch(`http://localhost:5000/api/polis/${id}`, { method: "DELETE" });
 };

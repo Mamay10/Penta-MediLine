@@ -5,6 +5,7 @@ import HeaderSection from "./header";
 import ButtonSection from "./button";
 import "../styles/setting.css";
 import "../styles/user.css";
+// import "../styles/setAntrian.css";
 
 
 interface MainLayoutProps {
