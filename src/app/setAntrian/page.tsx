@@ -1,3 +1,5 @@
+"src/app/setAntrian/page";
+
 "use client";
 import React, { useState, useEffect } from "react";
 import MainLayout from "../setting/MainLayout";
@@ -17,15 +19,13 @@ interface Poli {
 
 const SettingsPage: React.FC = () => {
   const [dokters, setDokters] = useState<Dokter[]>([]);
-  const [polis, setPolis] = useState<Poli[]>([]);
-
-  const [isDokterFormVisible, setDokterFormVisible] = useState(false);
-  const [isPoliFormVisible, setPoliFormVisible] = useState(false);
-
   const [dokterForm, setDokterForm] = useState<Dokter | null>(null);
-  const [poliForm, setPoliForm] = useState<Poli | null>(null);
-
+  const [isDokterFormVisible, setDokterFormVisible] = useState(false);
   const [isEditingDokter, setIsEditingDokter] = useState(false);
+
+  const [polis, setPolis] = useState<Poli[]>([]);
+  const [isPoliFormVisible, setPoliFormVisible] = useState(false);
+  const [poliForm, setPoliForm] = useState<Poli | null>(null);
   const [isEditingPoli, setIsEditingPoli] = useState(false);
 
   // Fetch data Dokter dan Poli dari API
@@ -46,13 +46,7 @@ const SettingsPage: React.FC = () => {
     const { name, value } = e.target;
     setDokterForm((prev) => ({ ...prev, [name]: value } as Dokter));
   };
-
-  // Fungsi untuk menangani perubahan input Poli
-  const handlePoliInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setPoliForm((prev) => ({ ...prev, [name]: value } as Poli));
-  };
-
+  
   // CRUD Dokter
   const handleAddOrUpdateDokter = async () => {
     if (dokterForm) {
@@ -79,11 +73,12 @@ const SettingsPage: React.FC = () => {
       }
     }
   };
-
-  const handleDeleteDokter = async () => {
+ const handleDeleteDokter = async () => {
     if (dokterForm) {
       try {
-        await fetch(`/api/dokters?nomor=${dokterForm.nomor}`, { method: "DELETE" });
+        await fetch(`/api/dokters?nomor=${dokterForm.nomor}`, {
+          method: "DELETE",
+        });
         setDokters((prev) =>
           prev.filter((dokter) => dokter.nomor !== dokterForm.nomor)
         );
@@ -93,6 +88,18 @@ const SettingsPage: React.FC = () => {
         console.error(error);
       }
     }
+  };  
+
+  const handleRowDokterClick = (dokter: Dokter) => {
+    setDokterForm(dokter);
+    setIsEditingDokter(true);
+    setDokterFormVisible(true);
+  };
+
+  // Fungsi untuk menangani perubahan input Poli
+  const handlePoliInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPoliForm((prev) => ({ ...prev, [name]: value } as Poli));
   };
 
   // CRUD Poli
@@ -142,11 +149,7 @@ const SettingsPage: React.FC = () => {
     setIsEditingPoli(true);
     setPoliFormVisible(true);
   };
-  const handleRowDokterClick = (dokter: Dokter) => {
-    setDokterForm(dokter);
-    setIsEditingDokter(true);
-    setDokterFormVisible(true);
-  };
+
 
   // Toggle forms
   const toggleDokterForm = (dokter?: Dokter) => {
