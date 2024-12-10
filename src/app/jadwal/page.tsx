@@ -13,12 +13,14 @@ interface Jadwal {
 }
 
 interface Dokter {
-  kode: number;
+  nomor: number;
+  kode: string;
   nama: string;
 }
 
 interface Poli {
-  kode: number;
+  nomor: number;
+  kode: string;
   nama: string;
 }
 
@@ -193,7 +195,7 @@ useEffect(() => {
                       <select name="poli" value={jadwalForm?.poli || ""} onChange={handleInputChange}>
                         <option value="">Pilih Poli</option>
                         {polis.map((poli) => (
-                          <option key={poli.kode} value={poli.nama}>
+                          <option key={poli.nomor} value={poli.kode}>
                             {poli.nama}
                           </option>
                         ))}
@@ -229,7 +231,7 @@ useEffect(() => {
                       <select name="dokter" value={jadwalForm?.dokter || ""} onChange={handleInputChange}>
                         <option value="">Pilih Dokter</option>
                         {dokters.map((dokter) => (
-                          <option key={dokter.kode} value={dokter.nama}>
+                          <option key={dokter.nomor} value={dokter.kode}>
                             {dokter.nama}
                           </option>
                         ))}
