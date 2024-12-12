@@ -9,7 +9,7 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
-  <div className="flex flex-col h-100 bg-gray-200">
+  <div className="flex flex-col h-screen bg-gray-200">
     {/* Logo Section */}
     <LogoSection />
     
@@ -22,11 +22,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
       <ContentSection />
       
       {/* Content Section */}
-      <div className="contentContainer flex-grow bg-gray-100 p-6 overflow-y-auto">
-        <div className="contentSection">{children}</div>
+      
       </div>
     </div>
-  </div>
+  
 
 );
 
