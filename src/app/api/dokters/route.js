@@ -20,6 +20,15 @@ export async function POST(req) {
   const { nama, kode } = body;
 
   try {
+
+    const existingKode = await pool.query(`SELECT 1 FROM dokters WHERE kode = $1`, [kode]);
+    if (existingKode.rowCount > 0) {
+      return new Response(
+        JSON.stringify({ error: "Kode sudah ada" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     const result = await pool.query(
       `INSERT INTO dokters (nama, kode) VALUES ($1, $2) RETURNING *`,
       [nama, kode]
@@ -29,6 +38,7 @@ export async function POST(req) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
+    console.error("POST Dokter Error:", error.message);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });

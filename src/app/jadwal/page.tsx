@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import React, { useState, useEffect } from "react";
 import MainLayout from "../setting/MainLayout";
 
@@ -9,7 +10,7 @@ interface Jadwal {
   jam_masuk: string;
   jam_selesai: string;
   dokter: string;
-  poli : string
+  poli: string;
 }
 
 interface Dokter {
@@ -31,57 +32,55 @@ const SettingsPage: React.FC = () => {
   const [isFormVisible, setFormVisible] = useState(false);
   const [jadwalForm, setJadwalForm] = useState<Jadwal | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [error, setError] = useState<{ kode?: string }>({});
 
-useEffect(() => {
-  fetch("/api/jadwals")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Fetched Jadwals:", data); // Log data yang diterima
-      setJadwals(data);
-    })
-    .catch((error) => console.error("Error fetching jadwals:", error));
+  useEffect(() => {
+    fetch("/api/jadwals")
+      .then((res) => res.json())
+      .then((data) => setJadwals(data))
+      .catch((error) => console.error("Error fetching jadwals:", error));
 
-  fetch("/api/dokters")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Fetched Dokters:", data); // Log data yang diterima
-      setDokters(data);
-    })
-    .catch((error) => console.error("Error fetching dokters:", error));
+    fetch("/api/dokters")
+      .then((res) => res.json())
+      .then((data) => setDokters(data))
+      .catch((error) => console.error("Error fetching dokters:", error));
 
-  fetch("/api/polis")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Fetched Polis:", data); // Log data yang diterima
-      setPolis(data);
-    })
-    .catch((error) => console.error("Error fetching polis:", error));
-}, []);
+    fetch("/api/polis")
+      .then((res) => res.json())
+      .then((data) => setPolis(data))
+      .catch((error) => console.error("Error fetching polis:", error));
+  }, []);
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setJadwalForm((prev) => ({ ...prev, [name]: value } as Jadwal));
+    if (name === "kode" && error.kode) {
+      setError((prev) => ({ ...prev, kode: undefined })); // Reset error kode saat mengetik ulang
+    }
+  };
 
-
-    // Handle Input Changes
-    const handleInputChange = (
-      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => {
-      const { name, value } = e.target;
-      setJadwalForm((prev) => ({ ...prev, [name]: value } as Jadwal));
-    };
-  
-  // CRUD jadwal
   const handleAddOrUpdateJadwal = async () => {
     if (jadwalForm) {
       const method = isEditing ? "PUT" : "POST";
       const url = "/api/jadwals";
-      console.log("Request Body:", jadwalForm); // Log data yang akan dikirim
       try {
         const res = await fetch(url, {
           method,
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(jadwalForm),
         });
+
         const data = await res.json();
-        console.log("Response Data:", data); // Log respons dari server
+        if (!res.ok) {
+          if (data.error && data.error.includes("Kode sudah ada")) {
+            setError({ kode: "Kode ini sudah ada" });
+          }
+          return;
+        }
+
+        setError({}); // Reset error jika berhasil
         if (isEditing) {
           setJadwals((prev) =>
             prev.map((jadwal) => (jadwal.nomor === data.nomor ? data : jadwal))
@@ -96,7 +95,6 @@ useEffect(() => {
       }
     }
   };
-  
 
   const handleDeleteJadwal = async () => {
     if (jadwalForm) {
@@ -116,39 +114,30 @@ useEffect(() => {
   };
 
   const handleRowJadwalClick = (jadwal: Jadwal) => {
+    setError({}); // Reset error saat memilih data
     setJadwalForm(jadwal);
     setIsEditing(true);
     setFormVisible(true);
-  
   };
 
-
-  // Toggle visibilitas form
   const toggleForm = () => {
-    setJadwalForm(null); // Reset form
-    setIsEditing(false); // Mode tambah
-    setFormVisible(!isFormVisible); // Tampilkan atau sembunyikan form
+    setError({}); // Reset error saat membuka atau menutup form
+    setJadwalForm(null);
+    setIsEditing(false);
+    setFormVisible(!isFormVisible);
   };
 
   return (
     <MainLayout>
-      {/* Kontainer untuk tombol dan kontainer utama */}
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {/* Tombol Tambah jadwal */}
         <button
           onClick={toggleForm}
-          style={{
-            marginBottom: "15px",
-            alignSelf: "flex-start",
-            padding: "6px 6px", // Padding standar tombol
-          }}
+          style={{ marginBottom: "15px", alignSelf: "flex-start", padding: "6px 6px" }}
         >
           &#43; Tambah Jadwal
         </button>
 
-        {/* Kontainer utama untuk tabel dan form */}
         <div style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
-          {/* Tabel jadwal */}
           <table>
             <thead>
               <tr>
@@ -165,20 +154,18 @@ useEffect(() => {
                 >
                   <td>{jadwal.nomor}</td>
                   <td>{jadwal.shift}</td>
-                  <td>{jadwal.jam_masuk} - {jadwal.jam_selesai}</td>
+                  <td>
+                    {jadwal.jam_masuk} - {jadwal.jam_selesai}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          {/* Render form secara kondisional di samping tabel */}
+
           {isFormVisible && (
             <div style={{ flex: 1, marginTop: "-50px" }}>
-              {" "}
-              {/* Menambahkan marginTop negatif untuk menaikkan form */}
               <div className="form-container">
-                <form
-                  onSubmit={(e) => e.preventDefault()}
-                >
+                <form onSubmit={(e) => e.preventDefault()}>
                   <div className="form-row">
                     <div className="form-group">
                       <label>Kode*</label>
@@ -189,10 +176,15 @@ useEffect(() => {
                         value={jadwalForm?.kode || ""}
                         onChange={handleInputChange}
                       />
+                      {error.kode && <small style={{ color: "red" }}>{error.kode}</small>}
                     </div>
                     <div className="form-group">
                       <label>Poli*</label>
-                      <select name="poli" value={jadwalForm?.poli || ""} onChange={handleInputChange}>
+                      <select
+                        name="poli"
+                        value={jadwalForm?.poli || ""}
+                        onChange={handleInputChange}
+                      >
                         <option value="">Pilih Poli</option>
                         {polis.map((poli) => (
                           <option key={poli.nomor} value={poli.kode}>
@@ -228,7 +220,11 @@ useEffect(() => {
                   <div className="form-row">
                     <div className="form-group">
                       <label>Dokter*</label>
-                      <select name="dokter" value={jadwalForm?.dokter || ""} onChange={handleInputChange}>
+                      <select
+                        name="dokter"
+                        value={jadwalForm?.dokter || ""}
+                        onChange={handleInputChange}
+                      >
                         <option value="">Pilih Dokter</option>
                         {dokters.map((dokter) => (
                           <option key={dokter.nomor} value={dokter.kode}>
@@ -247,11 +243,12 @@ useEffect(() => {
                       />
                     </div>
                   </div>
-                  <div className="button-group">
+
+                  <div className="button-container">
                     <button
                       type="button"
                       className="cancel-button"
-                      onClick={() => setFormVisible(false)}
+                      onClick={toggleForm}
                     >
                       Batal
                     </button>

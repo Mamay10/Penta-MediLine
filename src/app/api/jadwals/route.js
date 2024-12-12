@@ -26,24 +26,33 @@ export async function GET(req) {
 }
 
 // POST: Tambah jadwal baru
+// POST: Tambah jadwal baru
 export async function POST(req) {
   const body = await req.json();
-  console.log("POST Jadwal Body:", body); // Log data yang diterima
   const { kode, shift, jam_masuk, jam_selesai, dokter, poli } = body;
 
   try {
+    // Cek apakah kode sudah ada
+    const existingKode = await pool.query(`SELECT 1 FROM jadwals WHERE kode = $1`, [kode]);
+    if (existingKode.rowCount > 0) {
+      return new Response(
+        JSON.stringify({ error: "Kode sudah ada" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    // Jika kode tidak ada, tambahkan data baru
     const result = await pool.query(
       `INSERT INTO jadwals (kode, shift, jam_masuk, jam_selesai, dokter, poli) 
        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
       [kode, shift, jam_masuk, jam_selesai, dokter, poli]
     );
-    console.log("POST Jadwal Result:", result.rows[0]); // Log hasil query
     return new Response(JSON.stringify(result.rows[0]), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("POST Jadwal Error:", error.message); // Log error
+    console.error("POST Jadwal Error:", error.message);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });
