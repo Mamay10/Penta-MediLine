@@ -71,7 +71,7 @@ const App = () => {
           { id: "BA06", name: "TIA", date: "11/09 - 09:17" },
           { id: "BA07", name: "DINDA", date: "11/09 - 09:19" },
           { id: "A08", name: "DESI", date: "11/09 - 09:25" },
-          { id: "BA09", name: "INDAH", date: "11/09 - 09:" },
+          { id: "BA09", name: "INDAH", date: "11/09 - 09:28" },
         ].map((row, index) => (
           <tr
             key={row.id}
