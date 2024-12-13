@@ -42,49 +42,51 @@ const App = () => {
             </div>
           </div>      
           
-          {/* Tabel untuk menampilkan data antrian  */}
-          <div className="mt-4 flex-1 max-h-[300px] overflow-hidden border rounded-lg">
-            <div className="overflow-x-auto">
-              <table className="min-w-full text-xs text-left bg-white text-black border-collapse table-fixed">
-                {/* Table header with sticky positioning */}
-                <thead className="bg-[#D9D9D9] text-black">
-                  <tr>
-                    <th className="p-2 text-center border border-grey-300">Nomor Antrian</th>
-                    <th className="p-2 text-center border border-grey-300">Nama</th>
-                    <th className="p-2 text-center border border-grey-300">Tanggal</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
-            {/* Table body with scroll */}
-            <div className="block max-h-[200px] overflow-y-auto">
-              <table className="min-w-full text-xs text-left bg-white text-black border-collapse table-fixed">
-                <tbody>
-                  {[ 
-                    { id: "BA01", name: "MAMAY AYU LESTARI", date: "11/09 - 08:20" },
-                    { id: "A01", name: "KHOLIDIYAH AMNA", date: "11/09 - 08:40" },
-                    { id: "A02", name: "SALSABILA SHAFIYA", date: "11/09 - 09:05" },
-                    { id: "A03", name: "KAYLA", date: "11/09 - 09:10" },
-                    { id: "A04", name: "NABILA", date: "11/09 - 09:12" },
-                    { id: "BA05", name: "RAHMA", date: "11/09 - 09:15" },
-                    { id: "BA06", name: "TIA", date: "11/09 - 09:17" },
-                    { id: "BA07", name: "DINDA", date: "11/09 - 09:19" },
-                    { id: "A08", name: "DESI", date: "11/09 - 09:25" },
-                    { id: "BA09", name: "INDAH", date: "11/09 - 09:" },
-                  ].map((row, index) => (
-                    <tr
-                      key={row.id}
-                      className={`text-center ${index === 0 ? "bg-green-500 text-black" : "bg-white text-black"}`}
-                    >
-                      <td className="p-2 border border-gray-300">{row.id}</td>
-                      <td className="p-2 border border-gray-300">{row.name}</td>
-                      <td className="p-2 border border-gray-300">{row.date}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          {/* Tabel untuk menampilkan data antrian */}
+<div className="mt-4 flex-1 max-h-[300px] overflow-hidden border rounded-lg">
+  <div className="overflow-x-auto">
+    <table className="min-w-full text-[8px] text-left bg-white text-black border-collapse table-fixed">
+      {/* Table header dengan lebar kolom yang lebih kecil */}
+      <thead className="bg-[#D9D9D9] text-black">
+        <tr>
+          <th className="p-2 text-center border border-gray-300 w-1/6">Nomor Antrian</th>
+          <th className="p-2 text-center border border-gray-300 w-2/6">Nama</th>
+          <th className="p-2 text-center border border-gray-300 w-1/3">Tanggal</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  {/* Table body with scroll */}
+  <div className="block max-h-[200px] overflow-y-auto">
+    <table className="min-w-full text-[8px] text-left bg-white text-black border-collapse table-fixed">
+      <tbody>
+        {[
+          { id: "BA01", name: "MAMAY AYU LESTARI", date: "11/09 - 08:20" },
+          { id: "A01", name: "KHOLIDIYAH AMNA", date: "11/09 - 08:40" },
+          { id: "A02", name: "SALSABILA SHAFIYA", date: "11/09 - 09:05" },
+          { id: "A03", name: "KAYLA", date: "11/09 - 09:10" },
+          { id: "A04", name: "NABILA", date: "11/09 - 09:12" },
+          { id: "BA05", name: "RAHMA", date: "11/09 - 09:15" },
+          { id: "BA06", name: "TIA", date: "11/09 - 09:17" },
+          { id: "BA07", name: "DINDA", date: "11/09 - 09:19" },
+          { id: "A08", name: "DESI", date: "11/09 - 09:25" },
+          { id: "BA09", name: "INDAH", date: "11/09 - 09:" },
+        ].map((row, index) => (
+          <tr
+            key={row.id}
+            className={`text-center ${index === 0 ? "bg-green-500 text-black" : "bg-white text-black"}`}
+          >
+            <td className="p-2 border border-gray-300 w-1/6">{row.id}</td>
+            <td className="p-2 border border-gray-300 w-2/6">{row.name}</td>
+            <td className="p-2 border border-gray-300 w-1/3">{row.date}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
         </div>
 
         {/* Bagian Nomor Antrian */}
