@@ -1,9 +1,9 @@
-// src/app/api/polis/route.js
+// src/app/api/statuss/route.js
 import pool from '../db';
 
 export async function GET(req) {
   try {
-    const result = await pool.query('SELECT * FROM polis ORDER BY nomor ASC');
+    const result = await pool.query('SELECT * FROM statuss ORDER BY nomor ASC');
     return new Response(JSON.stringify(result.rows), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -17,29 +17,28 @@ export async function GET(req) {
 
 export async function POST(req) {
   const body = await req.json();
-  const { nama, kode } = body;
+  const { kode , status, durasi, keterangan} = body;
 
   try {
 
-     // Cek apakah kode sudah ada
-     const existingKode = await pool.query(`SELECT 1 FROM polis WHERE kode = $1`, [kode]);
-     if (existingKode.rowCount > 0) {
-       return new Response(
-         JSON.stringify({ error: "Kode sudah ada" }),
-         { status: 400, headers: { "Content-Type": "application/json" } }
-       );
-     } 
+    const existingKode = await pool.query(`SELECT 1 FROM statuss WHERE kode = $1`, [kode]);
+    if (existingKode.rowCount > 0) {
+      return new Response(
+        JSON.stringify({ error: "Kode sudah ada" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
     const result = await pool.query(
-      `INSERT INTO polis (nama, kode) VALUES ($1, $2) RETURNING *`,
-      [nama, kode]
+      `INSERT INTO statuss (kode, status, durasi, keterangan ) VALUES ($1, $2, $3, $4) RETURNING *`,
+      [kode , status, durasi, keterangan]
     );
     return new Response(JSON.stringify(result.rows[0]), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error("POST Jadwal Error:", error.message);
+    console.error("POST Status Error:", error.message);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });
@@ -48,12 +47,12 @@ export async function POST(req) {
 
 export async function PUT(req) {
   const body = await req.json();
-  const { nomor, nama, kode } = body;
+  const { nomor, kode , status, durasi, keterangan} = body;
 
   try {
     const result = await pool.query(
-      `UPDATE polis SET nama = $1, kode = $2 WHERE nomor = $3 RETURNING *`,
-      [nama, kode, nomor]
+      `UPDATE statuss SET kode = $1, status = $2, durasi = $3, keterangan = $4 WHERE nomor = $5 RETURNING *`,
+      [kode , status, durasi, keterangan, nomor]
     );
     return new Response(JSON.stringify(result.rows[0]), {
       status: 200,
@@ -71,8 +70,8 @@ export async function DELETE(req) {
   const nomor = url.searchParams.get('nomor');
 
   try {
-    await pool.query(`DELETE FROM polis WHERE nomor = $1`, [nomor]);
-    return new Response(JSON.stringify({ message: 'Poli berhasil dihapus' }), {
+    await pool.query(`DELETE FROM statuss WHERE nomor = $1`, [nomor]);
+    return new Response(JSON.stringify({ message: 'status berhasil dihapus' }), {
       status: 200,
     });
   } catch (error) {

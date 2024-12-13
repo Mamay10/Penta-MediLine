@@ -1,3 +1,5 @@
+"src/app/setAntrian/page";
+
 "use client";
 import React, { useState, useEffect } from "react";
 import MainLayout from "../setting/MainLayout";
@@ -17,42 +19,40 @@ interface Poli {
 
 const SettingsPage: React.FC = () => {
   const [dokters, setDokters] = useState<Dokter[]>([]);
-  const [polis, setPolis] = useState<Poli[]>([]);
-
-  const [isDokterFormVisible, setDokterFormVisible] = useState(false);
-  const [isPoliFormVisible, setPoliFormVisible] = useState(false);
-
   const [dokterForm, setDokterForm] = useState<Dokter | null>(null);
-  const [poliForm, setPoliForm] = useState<Poli | null>(null);
-
+  const [isDokterFormVisible, setDokterFormVisible] = useState(false);
   const [isEditingDokter, setIsEditingDokter] = useState(false);
+
+  const [polis, setPolis] = useState<Poli[]>([]);
+  const [isPoliFormVisible, setPoliFormVisible] = useState(false);
+  const [poliForm, setPoliForm] = useState<Poli | null>(null);
   const [isEditingPoli, setIsEditingPoli] = useState(false);
+
+  const [error, setError] = useState<{ kode?: string }>({});
 
   // Fetch data Dokter dan Poli dari API
   useEffect(() => {
     fetch("/api/dokters")
       .then((res) => res.json())
       .then(setDokters)
-      .catch(console.error);
+      .catch((error) => console.error("Error fetching dokters:", error));
+
 
     fetch("/api/polis")
       .then((res) => res.json())
       .then(setPolis)
-      .catch(console.error);
+      .catch((error) => console.error("Error fetching polis:", error));
   }, []);
 
   // Fungsi untuk menangani perubahan input Dokter
   const handleDokterInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setDokterForm((prev) => ({ ...prev, [name]: value } as Dokter));
+    if (name === "kode" && error.kode) {
+      setError((prev) => ({ ...prev, kode: undefined })); // Reset error kode saat mengetik ulang
+    }
   };
-
-  // Fungsi untuk menangani perubahan input Poli
-  const handlePoliInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setPoliForm((prev) => ({ ...prev, [name]: value } as Poli));
-  };
-
+  
   // CRUD Dokter
   const handleAddOrUpdateDokter = async () => {
     if (dokterForm) {
@@ -65,6 +65,14 @@ const SettingsPage: React.FC = () => {
           body: JSON.stringify(dokterForm),
         });
         const data = await res.json();
+        if (!res.ok) {
+          if (data.error && data.error.includes("Kode sudah ada")) {
+            setError({ kode: "Kode ini sudah ada" });
+          }
+          return;
+        }
+  
+        setError({}); // Reset error jika berhasil
         if (isEditingDokter) {
           setDokters((prev) =>
             prev.map((dokter) => (dokter.nomor === data.nomor ? data : dokter))
@@ -75,15 +83,16 @@ const SettingsPage: React.FC = () => {
         setDokterFormVisible(false);
         setDokterForm(null);
       } catch (error) {
-        console.error(error);
+        console.error("Error during Add/Update:", error);
       }
     }
   };
-
-  const handleDeleteDokter = async () => {
+ const handleDeleteDokter = async () => {
     if (dokterForm) {
       try {
-        await fetch(`/api/dokters?nomor=${dokterForm.nomor}`, { method: "DELETE" });
+        await fetch(`/api/dokters?nomor=${dokterForm.nomor}`, {
+          method: "DELETE",
+        });
         setDokters((prev) =>
           prev.filter((dokter) => dokter.nomor !== dokterForm.nomor)
         );
@@ -92,6 +101,22 @@ const SettingsPage: React.FC = () => {
       } catch (error) {
         console.error(error);
       }
+    }
+  };  
+
+  const handleRowDokterClick = (dokter: Dokter) => {
+    setError({}); // Reset error saat memilih data
+    setDokterForm(dokter);
+    setIsEditingDokter(true);
+    setDokterFormVisible(true);
+  };
+
+  // Fungsi untuk menangani perubahan input Poli
+  const handlePoliInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPoliForm((prev) => ({ ...prev, [name]: value } as Poli));
+    if (name === "kode" && error.kode) {
+      setError((prev) => ({ ...prev, kode: undefined })); // Reset error kode saat mengetik ulang
     }
   };
 
@@ -107,6 +132,12 @@ const SettingsPage: React.FC = () => {
           body: JSON.stringify(poliForm),
         });
         const data = await res.json();
+        if (!res.ok) {
+          if (data.error && data.error.includes("Kode sudah ada")) {
+            setError({ kode: "Kode ini sudah ada" });
+          }
+          return;
+        }
         if (isEditingPoli) {
           setPolis((prev) =>
             prev.map((poli) => (poli.nomor === data.nomor ? data : poli))
@@ -117,7 +148,7 @@ const SettingsPage: React.FC = () => {
         setPoliFormVisible(false);
         setPoliForm(null);
       } catch (error) {
-        console.error(error);
+        console.error("Error during Add/Update:", error);
       }
     }
   };
@@ -138,15 +169,12 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleRowPoliClick = (poli: Poli) => {
+    setError({}); // Reset error saat memilih data
     setPoliForm(poli);
     setIsEditingPoli(true);
     setPoliFormVisible(true);
   };
-  const handleRowDokterClick = (dokter: Dokter) => {
-    setDokterForm(dokter);
-    setIsEditingDokter(true);
-    setDokterFormVisible(true);
-  };
+
 
   // Toggle forms
   const toggleDokterForm = (dokter?: Dokter) => {
@@ -154,6 +182,8 @@ const SettingsPage: React.FC = () => {
     setPoliFormVisible(false);
     setDokterForm(dokter || { nomor: 0, nama: "", kode: "" });
     setIsEditingDokter(!!dokter);
+    setError({}); // Reset error saat membuka atau menutup form
+
   };
 
   const togglePoliForm = (poli?: Poli) => {
@@ -161,6 +191,8 @@ const SettingsPage: React.FC = () => {
     setDokterFormVisible(false);
     setPoliForm(poli || { nomor: 0, nama: "", kode: "" });
     setIsEditingPoli(!!poli);
+    setError({}); // Reset error saat membuka atau menutup form
+
   };
 
   return (
@@ -169,7 +201,8 @@ const SettingsPage: React.FC = () => {
         <div>
           <button
             onClick={() => toggleDokterForm()}
-            style={{ marginRight: "10px" }}
+            style={{ marginRight: "10px" , marginBottom: "15px", padding: "6px 6px"}}
+
           >
             + Tambah Dokter
           </button>
@@ -218,6 +251,7 @@ const SettingsPage: React.FC = () => {
                       value={dokterForm?.kode || ""}
                       onChange={handleDokterInputChange}
                     />
+                       {error.kode && <small style={{ color: "red" }}>{error.kode}</small>}
                   </div>
                   <div className="form-group">
                     <label>Nama lengkap</label>
@@ -299,6 +333,7 @@ const SettingsPage: React.FC = () => {
                       value={poliForm?.kode || ""}
                       onChange={handlePoliInputChange}
                     />
+                       {error.kode && <small style={{ color: "red" }}>{error.kode}</small>}
                   </div>
                   <div className="form-group">
                     <label>Nama Poli</label>

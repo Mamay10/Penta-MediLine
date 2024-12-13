@@ -90,3 +90,33 @@ export const updatePoli = async (id, updatedData) => {
 export const deletePoli = async (id) => {
   await fetch(`http://localhost:5000/api/polis/${id}`, { method: "DELETE" });
 };
+
+//jadwal
+// Jadwal
+export const fetchJadwals = async () => {
+  const response = await fetch("http://localhost:5000/api/jadwals");
+  return response.json();
+};
+
+export const addJadwal = async (jadwalData) => {
+  await fetch("http://localhost:5000/api/jadwals", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(jadwalData),
+  });
+};
+
+export const updateJadwal = async (nomor, updatedData) => {
+  await fetch(`http://localhost:5000/api/jadwals`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nomor, ...updatedData }),
+  });
+  
+};
+
+export const deleteJadwal = async (nomor) => {
+  await fetch(`http://localhost:5000/api/jadwals?nomor=${nomor}`, {
+    method: "DELETE",
+  });
+};

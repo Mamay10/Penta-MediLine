@@ -1,36 +1,108 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,  useEffect  } from "react";
 import MainLayout from "../setting/MainLayout";
 
 interface Status {
-  nomor?: number;
-  status?: string;
-  kode?: string;
-  durasi?: string;
+  nomor: number;
+  status: string;
+  kode: string;
+  durasi: string;
+  keterangan: string;
 }
 
 const SettingsPage: React.FC = () => {
-  const [users, setUsers] = useState<Status[]>([
-    { nomor: 1, status: "Active", kode: "A001", durasi: "10 mins" },
-    { nomor: 2, status: "Inactive", kode: "A002", durasi: "15 mins" },
-    { nomor: 3, status: "Pending", kode: "A003", durasi: "5 mins" },
-    { nomor: 4, status: "", kode: "", durasi: "" },
-    { nomor: 5, status: "", kode: "", durasi: "" },
-    { nomor: 6, status: "", kode: "", durasi: "" },
-  ]);
-
-  // State untuk mengontrol visibilitas form
+  const [statuss, setStatuss] = useState<Status[]>([]);
   const [isFormVisible, setFormVisible] = useState(false);
+  const [statusForm, setStatusForm] = useState<Status | null>(null);
+  const [isEditingStatus, setIsEditingStatus] = useState(false);
+  const [error, setError] = useState<{ kode?: string }>({});
+
+  useEffect(() => {
+    fetch("/api/statuss")
+      .then((res) => res.json())
+      .then(setStatuss)
+      .catch((error) => console.error("Error fetching statuss:", error));
+  },[]);
+
+  const handleStatusInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setStatusForm((prev) => ({ ...prev, [name]: value } as Status));
+    if (name === "kode" && error.kode) {
+      setError((prev) => ({ ...prev, kode: undefined })); // Reset error kode saat mengetik ulang
+    }
+  };
+
+  const handleAddOrUpdatestatus = async () => {
+    if (statusForm) {
+      const method = isEditingStatus ? "PUT" : "POST";
+      const url = isEditingStatus ? `/api/statuss` : `/api/statuss`;
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(statusForm),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          if (data.error && data.error.includes("Kode sudah ada")) {
+            setError({ kode: "Kode ini sudah ada" });
+          }
+          return;
+        }
+  
+        setError({}); // Reset error jika berhasil
+        if (isEditingStatus) {
+          setStatuss((prev) =>
+            prev.map((status) => (status.nomor === data.nomor ? data : status))
+          );
+        } else {
+          setStatuss((prev) => [...prev, data]);
+        }
+        setFormVisible(false);
+        setStatusForm(null);
+      } catch (error) {
+        console.error("Error during Add/Update:", error);
+      }
+    }
+  };
+
+  const handleDeleteStatus = async () => {
+    if (statusForm) {
+      try {
+        await fetch(`/api/statuss?nomor=${statusForm.nomor}`, {
+          method: "DELETE",
+        });
+        setStatuss((prev) =>
+          prev.filter((status) => status.nomor !== statusForm.nomor)
+        );
+        setFormVisible(false);
+        setStatusForm(null);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };  
+
+  const handleRowStatusClick = (status: Status) => {
+    setError({}); // Reset error saat memilih data
+    setStatusForm(status);
+    setIsEditingStatus(true);
+    setFormVisible(true);
+  };
+
 
   // Toggle visibilitas form
   const toggleForm = () => {
+    setError({});
+    setStatusForm(null);
+    setIsEditingStatus(false);
     setFormVisible(!isFormVisible);
   };
 
   return (
     <MainLayout>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {/* Tombol Tambah User */}
+        {/* Tombol Tambah status */}
         <button
           onClick={toggleForm}
           style={{
@@ -43,7 +115,7 @@ const SettingsPage: React.FC = () => {
         </button>
         {/* Kontainer utama untuk tabel dan form */}
         <div style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
-          {/* Tabel User */}
+          {/* Tabel status */}
           <table>
             <thead>
               <tr>
@@ -54,12 +126,14 @@ const SettingsPage: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((status) => (
-                <tr key={status.nomor}>
-                  <td>{status.nomor || "-"}</td>
-                  <td>{status.status || "-"}</td>
-                  <td>{status.kode || "-"}</td>
-                  <td>{status.durasi || "-"}</td>
+              {statuss.map((status) => (
+                <tr key={status.nomor}                   
+                onClick={() => handleRowStatusClick (status)}
+                >
+                  <td>{status.nomor}</td>
+                  <td>{status.kode}</td>
+                  <td>{status.status}</td>
+                  <td>{status.durasi}</td>
                 </tr>
               ))}
             </tbody>
@@ -70,11 +144,16 @@ const SettingsPage: React.FC = () => {
               {" "}
               {/* Menambahkan marginTop negatif untuk menaikkan form */}
               <div className="form-container">
-                <form>
+                <form onSubmit={(e) => e.preventDefault()}>
                   <div className="form-row">
                     <div className="form-group">
                       <label>Status*</label>
-                      <input type="text" placeholder="Masukkan Status" />
+                      <input type="text" name="status" placeholder="Masukkan Status"
+                      value={statusForm?.kode || ""}
+                      onChange={handleStatusInputChange}
+                      />
+                      {error.kode && <small style={{ color: "red" }}>{error.kode}</small>}
+
                     </div>
                     <div className="form-group">
                       <label>Durasi*</label>
