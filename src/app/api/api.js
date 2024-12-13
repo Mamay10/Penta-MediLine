@@ -120,3 +120,32 @@ export const deleteJadwal = async (nomor) => {
     method: "DELETE",
   });
 };
+
+//status
+export const fetchStatuss = async () => {
+  const response = await fetch("http://localhost:5000/api/statuss");
+  return response.json();
+};
+
+export const addStatus = async (statusData) => {
+  await fetch("http://localhost:5000/api/statuss", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(statusData),
+  });
+};
+
+export const updateStatus = async (nomor, updatedData) => {
+  await fetch(`http://localhost:5000/api/statuss`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nomor, ...updatedData }),
+  });
+  
+};
+
+export const deleteStatus = async (nomor) => {
+  await fetch(`http://localhost:5000/api/statuss?nomor=${nomor}`, {
+    method: "DELETE",
+  });
+};
