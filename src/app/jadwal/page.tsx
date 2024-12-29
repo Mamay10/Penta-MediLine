@@ -27,12 +27,15 @@ interface Poli {
 
 const SettingsPage: React.FC = () => {
   const [jadwals, setJadwals] = useState<Jadwal[]>([]);
-  const [dokters, setDokters] = useState<Dokter[]>([]);
-  const [polis, setPolis] = useState<Poli[]>([]);
   const [isFormVisible, setFormVisible] = useState(false);
   const [jadwalForm, setJadwalForm] = useState<Jadwal | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState<{ kode?: string }>({});
+  const [polis, setPolis] = useState<Poli[]>([]);
+  
+  const [dokters, setDokters] = useState<Dokter[]>([]);
+  
+  
 
   useEffect(() => {
     fetch("/api/jadwals")

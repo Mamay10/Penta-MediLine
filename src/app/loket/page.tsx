@@ -9,14 +9,7 @@ interface Loket {
 }
 
 const SettingsPage: React.FC = () => {
-  const [users, setUsers] = useState<Loket[]>([
-    { nomor: 1, nama: "Loket 1", jenis: "BPJS" },
-    { nomor: 2, nama: "Loket 2", jenis: "BPJS" },
-    { nomor: 3, nama: "Loket 3", jenis: "NON BPJS" },
-    { nomor: 4, nama: "Loket 4", jenis: "BPJS" },
-    { nomor: 5, nama: "Loket 5", jenis: "NON BPJS" },
-    { nomor: 6, nama: "Loket 6", jenis: "NON BPJS" },
-  ]);
+  const [users, setUsers] = useState<Loket[]>([]);
 
    // State untuk mengontrol visibilitas form
    const [isFormVisible, setFormVisible] = useState(false);
@@ -75,20 +68,21 @@ const SettingsPage: React.FC = () => {
                       <input type="text" placeholder="Masukkan Kode" />
                     </div>
                     <div className="form-group">
-                      <label>Klinik</label>
+                      <label>Nama</label>
+                      <input type="text" placeholder="Masukkan Nama" />
+                    </div>
+                   
+                  </div>
+
+                  <div className="form-row">
+                  <div className="form-group">
+                      <label>Poli</label>
                       <select>
-                        <option>Pilih Klinik</option>
+                        <option>Pilih poli</option>
                         <option>Poli Umum</option>
                         <option>Poli Gigi</option>
                         {/* Additional options can be added here */}
                       </select>
-                    </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label>Nama</label>
-                      <input type="text" placeholder="Masukkan Nama" />
                     </div>
                     <div className="form-group">
                       <label>Jenis Loket</label>
