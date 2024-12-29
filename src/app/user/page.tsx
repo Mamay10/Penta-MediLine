@@ -1,10 +1,11 @@
-//tampilan 
+//tampilan
 "use client";
 import React, { useState, useEffect } from "react";
 import MainLayout from "../setting/MainLayout";
 
 interface User {
   nomor: number;
+  id: number;
   username: string;
   password: string;
   nama_lengkap?: string;
@@ -17,59 +18,106 @@ interface User {
 
 const UserPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isFormVisible, setFormVisible] = useState(false);
   const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const [userForm, setUserForm] = useState<User | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [error, setError] = useState<{ id?: string; username?: string }>({});
 
-  const [newUser, setNewUser] = useState({
-    username: "",
-    password: "",
-    nama_lengkap: "",
-    no_telp: "",
-    tanggal_lahir: "",
-    email: "",
-    jenis_kelamin: "",
-    role: "",
-  });
 
   useEffect(() => {
-    fetch("/api/users", { method: "GET" })
+    fetch("/api/users")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Data dari API:", data);
+        console.log("Users received:", data);
         setUsers(data);
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => console.error("Error fetching users:", error));
   }, []);
+  
 
-  const handleAddUserClick = () => {
-    if (isFormVisible && !selectedUser) {
-      // Jika form sedang terbuka untuk tambah user, reset dan tutup form
-      setFormVisible(false);
-      setNewUser({
-        username: "",
-        password: "",
-        nama_lengkap: "",
-        no_telp: "",
-        tanggal_lahir: "",
-        email: "",
-        jenis_kelamin: "",
-        role: "",
-      });
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setUserForm((prev) => ({ ...prev, [name]: value } as User));
+  
+    if (name === "tanggal_lahir") {
+      const formattedValue = value; // `value` sudah dalam format YYYY-MM-DD
+      setUserForm((prev) => ({ ...prev, [name]: formattedValue } as User));
     } else {
-      // Jika form tertutup, tampilkan untuk tambah user
-      setSelectedUser(null);
-      setFormVisible(true);
-      setNewUser({
-        username: "",
-        password: "",
-        nama_lengkap: "",
-        no_telp: "",
-        tanggal_lahir: "",
-        email: "",
-        jenis_kelamin: "",
-        role: "",
-      });
+      setUserForm((prev) => ({ ...prev, [name]: value } as User));
+    }
+
+    // Reset error untuk input yang sedang diubah
+    if (error[name as keyof typeof error]) {
+      setError((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+  
+  
+
+  const handleAddOrUpdateUser = async () => {
+    if (userForm) {
+      const method = isEditing ? "PUT" : "POST";
+      const url = "/api/users";
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userForm),
+        });
+
+        const data = await res.json();
+        if (data.error) {
+          if (data.error.includes("id sudah ada")) {
+            setError((prev) => ({ ...prev, id: "ID ini sudah ada" }));
+          }
+          if (data.error.includes("username sudah ada")) {
+            setError((prev) => ({ ...prev, username: "Username ini sudah ada" }));
+          }
+          return;
+        }
+        
+
+        setError({}); // Reset error jika berhasil
+        if (isEditing) {
+          setUsers((prev) =>
+            prev.map((user) => (user.nomor === data.nomor ? data : user))
+          );
+        } else {
+          setUsers((prev) => [...prev, data]);
+        }
+        setFormVisible(false);
+        setUserForm(null);
+      } catch (error) {
+        console.error("Error during Add/Update:", error);
+      }
+    }
+  };
+
+
+
+  const handleRowClick = (user: User) => {
+    setError({});
+    setUserForm(user);
+    console.log("User clicked:", user);  // Pastikan tanggal_lahir ada
+    setIsEditing(true);
+    setFormVisible(true);
+  };
+  
+  const handleDelete = async () => {
+    if (userForm) {
+      try {
+        await fetch(`/api/users?nomor=${userForm.nomor}`, { method: "DELETE" });
+        setUsers((prev) =>
+          prev.filter((user) => user.nomor !== userForm.nomor)
+        );
+        setFormVisible(false);
+        setUserForm(null);
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
   };
 
@@ -81,98 +129,19 @@ const UserPage: React.FC = () => {
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
-  
-  const handleRowClick = (user: User) => {
-    setSelectedUser(user);
-    setNewUser({
-      username: user.username,
-      password: user.password,
-      nama_lengkap: user.nama_lengkap || "",
-      no_telp: user.no_telp || "",
-      tanggal_lahir: formatDate(user.tanggal_lahir), // Format tanggal lahir
-      email: user.email || "",
-      jenis_kelamin: user.jenis_kelamin || "",
-      role: user.role || "",
-    });
-    setFormVisible(true);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
-      const savedUser = await response.json();
-      console.log("savedUser:", savedUser);
-      setUsers([...users, savedUser]);
-      setFormVisible(false);
-      setNewUser({
-        username: "",
-        password: "",
-        nama_lengkap: "",
-        no_telp: "",
-        tanggal_lahir: "",
-        email: "",
-        jenis_kelamin: "",
-        role: "",
-      });
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const handleDelete = async () => {
-    if (selectedUser) {
-      try {
-        await fetch(`/api/users/${selectedUser.nomor}`, { method: "DELETE" });
-        setUsers(users.filter((user) => user.nomor !== selectedUser.nomor));
-        setSelectedUser(null);
-        setFormVisible(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    }
-  };
-
-  const handleCancelClick = () => {
-    // Hanya untuk form tambah user
-    setFormVisible(false);
-    setNewUser({
-      username: "",
-      password: "",
-      nama_lengkap: "",
-      no_telp: "",
-      tanggal_lahir: "",
-      email: "",
-      jenis_kelamin: "",
-      role: "",
-    });
-  };
-  
-  const handleExitClick = () => {
-    // Hanya untuk form data lengkap user
-    setFormVisible(false);
-    setSelectedUser(null);
-  };
-
-  
 
   const toggleForm = () => {
+    setError({});
+    setUserForm(null);
+    setIsEditing(false);
     setFormVisible(!isFormVisible);
   };
-
-
 
   return (
     <MainLayout>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <button
-          onClick={handleAddUserClick}
+          onClick={toggleForm}
           style={{
             marginBottom: "15px",
             alignSelf: "flex-start",
@@ -188,7 +157,7 @@ const UserPage: React.FC = () => {
               <tr>
                 <th>Nomor</th>
                 <th>Username</th>
-                <th>Password</th>
+                <th>Role</th>
               </tr>
             </thead>
             <tbody>
@@ -196,7 +165,7 @@ const UserPage: React.FC = () => {
                 <tr key={user.nomor} onClick={() => handleRowClick(user)}>
                   <td>{user.nomor}</td>
                   <td>{user.username}</td>
-                  <td>{user.password}</td>
+                  <td>{user.role}</td>
                 </tr>
               ))}
             </tbody>
@@ -205,31 +174,42 @@ const UserPage: React.FC = () => {
           {isFormVisible && (
             <div style={{ flex: 1, marginTop: "-50px" }}>
               <div className="form-container">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={(e) => e.preventDefault()}>
                   <div className="form-row">
+                    <div className="form-group">
+                      <label>ID*</label>
+                      <input
+                        type="text"
+                        name="id"
+                        placeholder="Masukkan Nomor ID"
+                        value={userForm?.id || ""}
+                        onChange={handleInputChange}
+                      />
+                      {error.id && (
+                        <small style={{ color: "red" }}>{error.id}</small>
+                      )}
+                    </div>
                     <div className="form-group">
                       <label>Username*</label>
                       <input
                         type="text"
+                        name="username"
                         placeholder="Masukkan Username"
-                        value={newUser.username}
-                        onChange={(e) =>
-                          setNewUser({ ...newUser, username: e.target.value })
-                        }
+                        value={userForm?.username || ""}
+                        onChange={handleInputChange}
                       />
+                      {error.username && (
+                        <small style={{ color: "red" }}>{error.username}</small>
+                      )}
                     </div>
                     <div className="form-group">
                       <label>Nama lengkap</label>
                       <input
                         type="text"
+                        name="nama_lengkap"
                         placeholder="Masukkan Nama Lengkap"
-                        value={newUser.nama_lengkap}
-                        onChange={(e) =>
-                          setNewUser({
-                            ...newUser,
-                            nama_lengkap: e.target.value,
-                          })
-                        }
+                        value={userForm?.nama_lengkap || ""}
+                        onChange={handleInputChange}
                       />
                     </div>
                   </div>
@@ -237,14 +217,13 @@ const UserPage: React.FC = () => {
                   <div className="form-row">
                     <div className="form-group">
                       <label>Password*</label>
-                      <div style={{ position: "relative", width: "100%" }}>
+                      <div style={{ position: "relative", width: "0%" }}>
                         <input
                           type={isPasswordVisible ? "text" : "password"}
+                          name="password"
                           placeholder="Masukkan Password"
-                          value={newUser.password}
-                          onChange={(e) =>
-                            setNewUser({ ...newUser, password: e.target.value })
-                          }
+                          value={userForm?.password}
+                          onChange={handleInputChange}
                         />
                         <div
                           style={{
@@ -297,24 +276,19 @@ const UserPage: React.FC = () => {
                         <label>No. Telp*</label>
                         <input
                           type="tel"
+                          name="no_telp"
                           placeholder="Masukkan No. Telepon"
-                          value={newUser.no_telp}
-                          onChange={(e) =>
-                            setNewUser({ ...newUser, no_telp: e.target.value })
-                          }
+                          value={userForm?.no_telp}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div className="form-group">
                         <label>Tanggal Lahir*</label>
                         <input
                           type="date"
-                          value={newUser.tanggal_lahir}
-                          onChange={(e) =>
-                            setNewUser({
-                              ...newUser,
-                              tanggal_lahir: e.target.value,
-                            })
-                          }
+                          name="tanggal_lahir"
+                          value={userForm?.tanggal_lahir}
+                          onChange={handleInputChange}
                         />
                       </div>
                     </div>
@@ -325,11 +299,10 @@ const UserPage: React.FC = () => {
                       <label>Email</label>
                       <input
                         type="email"
+                        name="email"
                         placeholder="Masukkan Email"
-                        value={newUser.email}
-                        onChange={(e) =>
-                          setNewUser({ ...newUser, email: e.target.value })
-                        }
+                        value={userForm?.email}
+                        onChange={handleInputChange}
                       />
                     </div>
                     <div className="form-row">
@@ -338,28 +311,24 @@ const UserPage: React.FC = () => {
                         <div className="radio-group">
                           <input
                             type="radio"
-                            name="gender"
+                            name="jenis_kelamin"
                             value="Laki-laki"
-                            checked={newUser.jenis_kelamin === "Laki-laki"}
-                            onChange={(e) =>
-                              setNewUser({
-                                ...newUser,
-                                jenis_kelamin: e.target.value,
-                              })
-                            }
+                            checked={userForm?.jenis_kelamin === "Laki-laki"}
+                            onChange={handleInputChange}
+                            style={{
+                              accentColor: "blue", // Warna biru untuk radio button
+                            }}
                           />{" "}
                           Laki-laki
                           <input
                             type="radio"
-                            name="gender"
+                            name="jenis_kelamin"
                             value="Perempuan"
-                            checked={newUser.jenis_kelamin === "Perempuan"}
-                            onChange={(e) =>
-                              setNewUser({
-                                ...newUser,
-                                jenis_kelamin: e.target.value,
-                              })
-                            }
+                            checked={userForm?.jenis_kelamin === "Perempuan"}
+                            onChange={handleInputChange}
+                            style={{
+                              accentColor: "blue", // Warna biru untuk radio button
+                            }}
                           />{" "}
                           Perempuan
                         </div>
@@ -367,46 +336,37 @@ const UserPage: React.FC = () => {
                       <div className="form-group">
                         <label>Role</label>
                         <select
-                          value={newUser.role}
-                          onChange={(e) =>
-                            setNewUser({ ...newUser, role: e.target.value })
-                          }
+                          name="role"
+                          value={userForm?.role || ""}
+                          onChange={handleInputChange}
                         >
-                          <option>Pilih Role</option>
-                          <option>Dokter</option>
-                          <option>Teller</option>
+                          <option value="">Pilih Role</option>
+                          <option value="Admin">Admin</option>
+                          <option value="Teller">Teller</option>
                         </select>
                       </div>
                     </div>
                   </div>
 
                   <div className="button-container">
-                    {!selectedUser ? (
-                      // Tombol Batal hanya untuk tambah user
-                      <button
-                        type="button"
-                        className="cancel-button"
-                        onClick={handleCancelClick}
-                      >
-                        Batal
-                      </button>
-                    ) : (
-                      // Tombol Keluar hanya untuk data lengkap user
-                      <button
-                        type="button"
-                        className="cancel-button"
-                        onClick={handleExitClick}
-                      >
-                        Keluar
-                      </button>
-                    )}
-                    <button type="submit" className="save-button">
-                      Simpan
+                    <button
+                      type="button"
+                      className="cancel-button"
+                      onClick={toggleForm}
+                    >
+                      Batal
                     </button>
-                    {selectedUser && (
+                    <button
+                      type="submit"
+                      className="save-button"
+                      onClick={handleAddOrUpdateUser}
+                    >
+                      {isEditing ? "Update" : "Tambah"}
+                    </button>
+                    {isEditing && (
                       <button
                         type="button"
-                        className="hapus-button"
+                        className="delete-button"
                         onClick={handleDelete}
                       >
                         Hapus

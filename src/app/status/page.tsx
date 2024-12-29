@@ -1,5 +1,5 @@
 "use client";
-import React, { useState,  useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import MainLayout from "../setting/MainLayout";
 
 interface Status {
@@ -22,7 +22,7 @@ const SettingsPage: React.FC = () => {
       .then((res) => res.json())
       .then(setStatuss)
       .catch((error) => console.error("Error fetching statuss:", error));
-  },[]);
+  }, []);
 
   const handleStatusInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,7 +32,7 @@ const SettingsPage: React.FC = () => {
     }
   };
 
-  const handleAddOrUpdatestatus = async () => {
+  const handleAddOrUpdateStatus = async () => {
     if (statusForm) {
       const method = isEditingStatus ? "PUT" : "POST";
       const url = isEditingStatus ? `/api/statuss` : `/api/statuss`;
@@ -49,7 +49,7 @@ const SettingsPage: React.FC = () => {
           }
           return;
         }
-  
+
         setError({}); // Reset error jika berhasil
         if (isEditingStatus) {
           setStatuss((prev) =>
@@ -81,7 +81,7 @@ const SettingsPage: React.FC = () => {
         console.error(error);
       }
     }
-  };  
+  };
 
   const handleRowStatusClick = (status: Status) => {
     setError({}); // Reset error saat memilih data
@@ -89,7 +89,6 @@ const SettingsPage: React.FC = () => {
     setIsEditingStatus(true);
     setFormVisible(true);
   };
-
 
   // Toggle visibilitas form
   const toggleForm = () => {
@@ -121,17 +120,16 @@ const SettingsPage: React.FC = () => {
               <tr>
                 <th>Nomor</th>
                 <th>Status</th>
-                <th>Kode</th>
                 <th>Durasi</th>
               </tr>
             </thead>
             <tbody>
               {statuss.map((status) => (
-                <tr key={status.nomor}                   
-                onClick={() => handleRowStatusClick (status)}
+                <tr
+                  key={status.nomor}
+                  onClick={() => handleRowStatusClick(status)}
                 >
                   <td>{status.nomor}</td>
-                  <td>{status.kode}</td>
                   <td>{status.status}</td>
                   <td>{status.durasi}</td>
                 </tr>
@@ -147,45 +145,76 @@ const SettingsPage: React.FC = () => {
                 <form onSubmit={(e) => e.preventDefault()}>
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Status*</label>
-                      <input type="text" name="status" placeholder="Masukkan Status"
-                      value={statusForm?.kode || ""}
-                      onChange={handleStatusInputChange}
+                      <label>Kode*</label>
+                      <input
+                        type="text"
+                        name="kode"
+                        placeholder="Masukkan Status"
+                        value={statusForm?.kode || ""}
+                        onChange={handleStatusInputChange}
                       />
-                      {error.kode && <small style={{ color: "red" }}>{error.kode}</small>}
-
+                      {error.kode && (
+                        <small style={{ color: "red" }}>{error.kode}</small>
+                      )}
                     </div>
                     <div className="form-group">
                       <label>Durasi*</label>
-                      <input type="text" placeholder="Masukkan Durasi" />
+                      <input 
+                      type="text" 
+                      placeholder="Masukkan Durasi"
+                      name="durasi"
+                      value={statusForm?.durasi || ""} 
+                      onChange={handleStatusInputChange}
+                      />
                     </div>
                   </div>
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Kode</label>
-                      <input type="text" placeholder="Masukkan Kode" />
+                      <label>Status*</label>
+                      <input type="text" placeholder="Masukkan Kode" 
+                       name="status"
+                       value={statusForm?.status || ""} 
+                       onChange={handleStatusInputChange}
+                      />
                     </div>
                   </div>
 
                   <div className="form-row">
                     <div className="form-group">
                       <label>Nama Lain</label>
-                      <input type="text" placeholder="Masukkan Nama Lain" />
+                      <input type="text" placeholder="Masukkan Nama Lain" 
+                       name="keterangan"
+                       value={statusForm?.keterangan || ""} 
+                       onChange={handleStatusInputChange}
+                      />
                     </div>
                   </div>
 
-                  <div className="button-group">
+                  <div className="button-container">
                     <button
                       type="button"
                       className="cancel-button"
-                      onClick={() => setFormVisible(false)}
+                      onClick={toggleForm}
                     >
                       Batal
                     </button>
-                    <button type="submit" className="save-button">
-                      Simpan
+                    <button
+                      type="submit"
+                      className="save-button"
+                      onClick={handleAddOrUpdateStatus}
+                    >
+                      {isEditingStatus? "Update" : "Tambah"}
                     </button>
+                    {isEditingStatus && (
+                      <button
+                        type="button"
+                        className="delete-button"
+                        onClick={handleDeleteStatus}
+                      >
+                        Hapus
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>

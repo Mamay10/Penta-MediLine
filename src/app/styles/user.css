@@ -118,6 +118,7 @@
   }
   .form-group input{
     height: 35px;
+   
   }
   
   .radio-group {
@@ -208,4 +209,17 @@
     font-family: Arial, sans-serif; /* Tambahan opsional untuk memastikan tampilan */
   }
   
+  input[type="radio"]:checked {
+    background-color: blue;
+    border-color: blue;
+  }
+  input[type="radio"]:hover {
+    cursor: pointer;
+    border-color: lightblue;
+  }
+  select:focus {
+    border-color: blue;
+    outline: none;
+    box-shadow: 0 0 5px lightblue;
+  }
   
